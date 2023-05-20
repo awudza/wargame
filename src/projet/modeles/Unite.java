@@ -7,18 +7,38 @@ public class Unite {
 
     private TypeUnite type;
 
+    private Arme arme;
+
     /**
      * Constructeur permettant d'initialiser tous les attributs d'une unité
      * @param nom
      * @param etat
      * @param degat
      * @param type
+     * @param arme
      */
-    public Unite(String nom, String etat, int degat,TypeUnite type){
+    public Unite(String nom, String etat, int degat,TypeUnite type,Arme arme){
         this.degat=degat;
         this.nom=nom;
         this.etat=etat;
         this.type=type;
+        this.arme=arme;
+    }
+
+    /**
+     *
+     * @return l'arme de l'unité
+     */
+    public Arme getArme() {
+        return arme;
+    }
+
+    /**
+     * modifie l'arme de l'unité
+     * @param arme
+     */
+    public void setArme(Arme arme) {
+        this.arme = arme;
     }
 
     /**

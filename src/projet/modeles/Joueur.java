@@ -6,6 +6,7 @@ public class Joueur {
     private String prenom;
     private String pseudo;
     private int score;
+    private Compagnie compagnie;
 
     /**
      * cette fonction est le constructeur de joueur qui permet d'initialiser tous ses attributs
@@ -15,12 +16,13 @@ public class Joueur {
      * @param pseudo
      * @param score
      */
-    public Joueur(int id,String nom, String prenom, String pseudo, int score){
+    public Joueur(int id,String nom, String prenom, String pseudo, int score,Compagnie compagnie){
         this.id=id;
         this.nom=nom;
         this.prenom=prenom;
         this.score=score;
         this.pseudo=pseudo;
+        this.compagnie=compagnie;
     }
 
     /**
