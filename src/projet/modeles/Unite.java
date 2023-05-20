@@ -5,16 +5,20 @@ public class Unite {
     private String etat;
     private int degat;
 
+    private TypeUnite type;
+
     /**
      * Constructeur permettant d'initialiser tous les attributs d'une unité
      * @param nom
      * @param etat
      * @param degat
+     * @param type
      */
-    public Unite(String nom, String etat, int degat){
+    public Unite(String nom, String etat, int degat,TypeUnite type){
         this.degat=degat;
         this.nom=nom;
         this.etat=etat;
+        this.type=type;
     }
 
     /**
@@ -51,6 +55,15 @@ public class Unite {
     }
 
     /**
+     *
+     * @return le type de l'unite
+     */
+
+    public TypeUnite getType() {
+        return type;
+    }
+
+    /**
      * mis à jour de l'attribut degat de l'unité
      * @param degat
      */
@@ -66,5 +79,13 @@ public class Unite {
 
     public void setEtat(String etat) {
         this.etat = etat;
+    }
+
+    /**
+     * modifiez le type de l'unite
+     * @param type
+     */
+    public void setType(TypeUnite type) {
+        this.type = type;
     }
 }
