@@ -55,11 +55,12 @@ public class PlateauDeJeu extends JPanel {
 
     private void drawHex(Graphics g, int x, int y, int r) {
         Hexagone hex = new Hexagone(x, y, r);
-        //dessinTerrain(g, x, y);
-        g.setColor(new Color(0xFFFFFF));
+
+        g.setColor(new Color(255,255,255,0));
         g.fillPolygon(hex);
-        g.setColor(new Color(0,0,0));
+        g.setColor(new Color(255,255,255,50));
         g.drawPolygon(hex);
+
         g.setColor(new Color(0xFFFFFF));
 
         // Coordonnées de la case
@@ -70,7 +71,7 @@ public class PlateauDeJeu extends JPanel {
         int textY = y + r/2; // Modifier ces valeurs selon vos besoins
 
         // Définir la couleur et la police du texte
-        g.setColor(new Color(0, 0, 0));
+        g.setColor(new Color(0, 0, 0)); // Noir
         g.setFont(new Font("Arial", Font.PLAIN, 12)); // Modifier la police et la taille selon vos besoins
 
         // Afficher les coordonnées de la case

@@ -10,7 +10,7 @@ package projet.modeles.tests;
     import javax.swing.JFrame;
 
 public class Main {
-    private static Background background;
+    private static PlateauDeJeu plateau;
 
     public static void main(String[] args) {
        JFrame frame=new JFrame("WARGAME");
@@ -18,10 +18,13 @@ public class Main {
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
-        JLayeredPane pane=new JLayeredPane();
+        Background background=new Background();
+        frame.setLayout(new OverlayLayout(frame.getContentPane()));
 
-        background=new Background();
-        frame.setContentPane(background);
+        plateau=new PlateauDeJeu();
+        plateau.setOpaque(false);
+        frame.add(plateau);
+        frame.add(background);
         frame.setVisible(true);
     }
 }
