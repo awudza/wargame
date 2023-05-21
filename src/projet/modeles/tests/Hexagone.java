@@ -32,7 +32,6 @@ public class Hexagone extends Polygon {
 
     public Hexagone(int x, int y, int radius) {
         this(new Point(x, y), radius);
-
         System.out.println(x);
         System.out.println(y);
     }

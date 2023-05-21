@@ -1,25 +1,28 @@
 package projet.modeles.tests;
 
-    import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Stroke;
+    import com.sun.jdi.ArrayReference;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+    import java.awt.*;
+    import java.io.IOException;
 
-        public class Main{
+    import javax.swing.*;
 
-            public static void main(String[] args) {
-                JFrame f = new JFrame();
-               PlateauDeJeu p = new PlateauDeJeu();
+    import javax.swing.JFrame;
 
-                f.setContentPane(p);
-                f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                f.pack();
-                f.setLocationRelativeTo(null);
-                f.setVisible(true);
-            }
-        }
+public class Main {
+    private static Background background;
+
+    public static void main(String[] args) {
+       JFrame frame=new JFrame("WARGAME");
+        frame.setSize(1200, 800);
+        frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+        JLayeredPane pane=new JLayeredPane();
+
+        background=new Background();
+        frame.setContentPane(background);
+        frame.setVisible(true);
+    }
+}
+

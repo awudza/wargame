@@ -1,5 +1,6 @@
 package projet.modeles.tests;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 
@@ -17,10 +18,12 @@ public class PlateauDeJeu extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-
+        ImageIcon imageIcon = new ImageIcon("map.png");
+        Image image = imageIcon.getImage();
+        g2d.drawImage(image, 0, 0, getWidth(), getHeight(), this);
         g2d.setStroke(new BasicStroke(4.0f, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER));
 
-        drawHexGridAdvanced(g2d, 60, 40);
+        drawHexGridAdvanced(g2d,25 , 40);
     }
 
     private void drawHexGridAdvanced(Graphics g, int n, int r) {
@@ -52,11 +55,27 @@ public class PlateauDeJeu extends JPanel {
 
     private void drawHex(Graphics g, int x, int y, int r) {
         Hexagone hex = new Hexagone(x, y, r);
-
+        //dessinTerrain(g, x, y);
         g.setColor(new Color(0xFFFFFF));
         g.fillPolygon(hex);
         g.setColor(new Color(0,0,0));
         g.drawPolygon(hex);
         g.setColor(new Color(0xFFFFFF));
+
+        // Coordonnées de la case
+        String coordinates =  x + ", " + y ;
+
+        // Déterminer les positions x et y pour afficher le texte
+        int textX = x - r/2; // Modifier ces valeurs selon vos besoins
+        int textY = y + r/2; // Modifier ces valeurs selon vos besoins
+
+        // Définir la couleur et la police du texte
+        g.setColor(new Color(0, 0, 0));
+        g.setFont(new Font("Arial", Font.PLAIN, 12)); // Modifier la police et la taille selon vos besoins
+
+        // Afficher les coordonnées de la case
+        g.drawString(coordinates, textX, textY);
     }
+
+
 }
