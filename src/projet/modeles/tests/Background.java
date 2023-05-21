@@ -8,14 +8,11 @@ import java.io.IOException;
 
 public class Background extends JLayeredPane {
     private Image backgroundImage;
-    private PlateauDeJeu plateauDeJeu;
     private ImageIcon ico;
     public Background() {
         super();
-        plateauDeJeu=new PlateauDeJeu();
         ico=new ImageIcon(getClass().getResource("/map.png"));
         this.backgroundImage=this.ico.getImage();
-        this.add(plateauDeJeu,2);
     }
 
     public void paintComponent(Graphics g) {

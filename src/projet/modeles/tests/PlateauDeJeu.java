@@ -3,8 +3,13 @@ package projet.modeles.tests;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 public class PlateauDeJeu extends JPanel {
+
+    private ArrayList<Hexagone> listHexagones;
     private final int WIDTH = 1200;
     private final int HEIGHT = 800;
 
@@ -12,6 +17,7 @@ public class PlateauDeJeu extends JPanel {
     private final int H2 = HEIGHT / 2;
 
     public PlateauDeJeu() {
+        listHexagones=new ArrayList<>();
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
     }
 
@@ -22,7 +28,6 @@ public class PlateauDeJeu extends JPanel {
         Image image = imageIcon.getImage();
         g2d.drawImage(image, 0, 0, getWidth(), getHeight(), this);
         g2d.setStroke(new BasicStroke(4.0f, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER));
-
         drawHexGridAdvanced(g2d,25 , 40);
     }
 
@@ -53,8 +58,17 @@ public class PlateauDeJeu extends JPanel {
         }
     }
 
+    private void drawHex(Hexagone hex,Graphics g){
+        g.setColor(new Color(255,255,255,0));
+        g.fillPolygon(hex);
+        g.setColor(new Color(0,180,255));
+        g.drawPolygon(hex);
+
+        g.setColor(new Color(0xFFFFFF));
+    }
     private void drawHex(Graphics g, int x, int y, int r) {
         Hexagone hex = new Hexagone(x, y, r);
+        this.listHexagones.add(hex);
 
         g.setColor(new Color(255,255,255,0));
         g.fillPolygon(hex);
@@ -62,6 +76,7 @@ public class PlateauDeJeu extends JPanel {
         g.drawPolygon(hex);
 
         g.setColor(new Color(0xFFFFFF));
+
 
         // Coordonnées de la case
         String coordinates =  x + ", " + y ;
@@ -77,6 +92,20 @@ public class PlateauDeJeu extends JPanel {
         // Afficher les coordonnées de la case
         g.drawString(coordinates, textX, textY);
     }
+
+    /**
+     * fonction qui renvoir l'hexagon contenant le point
+     * @param x
+     * @param y
+     * @return
+     */
+    public Hexagone hexagoneContenant(int x,int y){
+        for(Hexagone hex:listHexagones)
+            if (hex.contains(x,y))return hex;
+        return null;
+    }
+
+
 
 
 }

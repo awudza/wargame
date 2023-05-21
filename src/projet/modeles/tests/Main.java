@@ -1,10 +1,5 @@
 package projet.modeles.tests;
 
-    import com.sun.jdi.ArrayReference;
-
-    import java.awt.*;
-    import java.io.IOException;
-
     import javax.swing.*;
 
     import javax.swing.JFrame;

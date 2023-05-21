@@ -57,4 +57,15 @@ public class Hexagone extends Polygon {
             System.out.printf("%d. (%d, %d)\n", p, point.x, point.y);
         }
     }
+
+    /**
+     * fonction qui retourne vrai si les coordonnées sont contenus dans l'hexagone
+     * @param x the specified X coordinate to be tested
+     * @param y the specified Y coordinate to be tested
+     * @return
+     */
+
+    public boolean contains(int x,int y){
+        return this.contains(x,y);
+    }
 }
