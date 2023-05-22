@@ -40,6 +40,6 @@ public class ComponentCellule extends JPanel implements MouseListener{
 
     @Override
     public void mouseExited(MouseEvent e) {
-
+            
     }
 }

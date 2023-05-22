@@ -9,7 +9,7 @@ public class Main{
 
             public static void main(String[] args) {
                 JFrame frame = new JFrame();
-                frame.setSize(1200, 800);
+                frame.setSize(1300, 900);
                 frame.setLocationRelativeTo(null);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setVisible(true);

@@ -10,7 +10,7 @@ public class Background extends JLayeredPane {
     private ImageIcon ico;
     public Background() {
         super();
-        ico=new ImageIcon(getClass().getResource("../../resources/map.png"));
+        ico=new ImageIcon(getClass().getResource("../../resources/wargame.png"));
         this.backgroundImage=this.ico.getImage();
     }
 
