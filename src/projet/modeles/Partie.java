@@ -6,6 +6,8 @@ public class Partie {
     private int numPartie;
     private Terrain terrain;
     private ArrayList<Joueur> joueurs;
+    private Joueur joueur1;
+    private Joueur joueur2;
 
     /**
      * Constructer de la partie
@@ -14,8 +16,17 @@ public class Partie {
      */
     public Partie(int num,Terrain terrain){
         this.joueurs=new ArrayList<>(2);
+        this.joueur1=new Joueur(1,"Testeur1","jd","tst1");
+        this.joueur2=new Joueur(2,"Testeur2","bd","tst2");
+
         this.numPartie=num;
         this.terrain=terrain;
+        AfficherUnite();
+    }
+
+    public void AfficherUnite(){
+        this.terrain.afficherUnite1(this.joueur1);
+        this.terrain.afficherUnite2(this.joueur2);
     }
 
     /**

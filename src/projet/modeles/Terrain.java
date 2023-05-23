@@ -3,6 +3,7 @@ package projet.modeles;
 import projet.component.ComponentCellule;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -18,6 +19,7 @@ public class Terrain extends JPanel {
     private final int H2 = hauteur / 2;
 
     public Terrain(){
+        this.setLayout(null);
         listCellules=new ArrayList<>();
         setPreferredSize(new Dimension(largeur, hauteur));
     }
@@ -62,11 +64,7 @@ public class Terrain extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-        ImageIcon imageIcon = new ImageIcon("map.png");
-        Image image = imageIcon.getImage();
-        g2d.drawImage(image, 0, 0, getWidth(), getHeight(), this);
         g2d.setStroke(new BasicStroke(4.0f, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER));
-
         dessinerGrilleHexagone(g2d, 60, 40);
     }
 
@@ -106,7 +104,7 @@ public class Terrain extends JPanel {
             g.setColor(new Color(51,0,0));
             g.drawPolygon(cellule);
         }else{
-            g.setColor(new Color(255,255,255,50));
+            g.setColor(new Color(255,255,255,0));
             g.drawPolygon(cellule);
         }
         g.setColor(new Color(0xFFFFFF));
@@ -122,7 +120,7 @@ public class Terrain extends JPanel {
         g.setFont(new Font("Arial", Font.PLAIN, 12)); // Modifier la police et la taille selon vos besoins
 
         // Afficher les coordonnées de la case
-        g.drawString(coordinates, textX, textY);
+        //g.drawString(coordinates, textX, textY);
     }
 
     /**
@@ -135,5 +133,103 @@ public class Terrain extends JPanel {
         for(Cellule cel: this.listCellules)
             if (cel.contain(x,y))return cel;
         return null;
+    }
+
+
+    public void afficherUnite1(Joueur joueur1) {
+        Compagnie compagnie=joueur1.getCompagnie();
+        ArrayList<Unite> listUnite=compagnie.getListUnite();
+
+        for (Unite unite:listUnite){
+            JButton bouton = new JButton();
+
+
+            switch (unite.getNom()) {
+                case "Soldat":
+                    unite.setPos(1244,375);
+                    bouton=   unite.affichageUnite(Color.GREEN);
+                    break;
+                case "Goliath":
+                    unite.setPos(1070,315);
+                    bouton=unite.affichageUnite(Color.GREEN);
+                    break;
+
+                case "Chevalier":
+                    unite.setPos(1140,435);
+                    bouton=unite.affichageUnite(Color.GREEN);
+
+                    break;
+                case "Poter":
+                   unite.setPos(1070,195);
+                    bouton=unite.affichageUnite(Color.GREEN);
+                    break;
+                case "Archer1":
+                    unite.setPos(1140,95);
+                    bouton=unite.affichageUnite(Color.GREEN);
+                    break;
+                case "Archer2":
+                    unite.setPos(932,315);
+                    bouton=unite.affichageUnite(Color.GREEN);
+                    break;
+                case "Soldat2" :
+                    unite.setPos(932,435);
+                    bouton=unite.affichageUnite(Color.GREEN);
+                    break;
+                case "Chevalier2":
+                    unite.setPos(1105,615);
+                    bouton=unite.affichageUnite(Color.GREEN);
+                    break;
+            }
+            this.add(bouton);
+        }
+
+    }
+
+    public void afficherUnite2(Joueur joueur2) {
+        Compagnie compagnie=joueur2.getCompagnie();
+        ArrayList<Unite> listUnite=compagnie.getListUnite();
+
+        for (Unite unite:listUnite){
+            JButton bouton = new JButton();
+
+
+            switch (unite.getNom()) {
+                case "Soldat":
+                    unite.setPos(101,686);
+                    bouton=unite.affichageUnite(Color.red);
+                    break;
+                case "Goliath":
+                    unite.setPos(239,675);
+                    bouton=unite.affichageUnite(Color.red);
+                    break;
+
+                case "Chevalier":
+                    unite.setPos(202,595);
+                    bouton=unite.affichageUnite(Color.red);
+
+                    break;
+                case "Poter":
+                    unite.setPos(308,806);
+                    bouton=unite.affichageUnite(Color.red);
+                    break;
+                case "Archer1":
+                    unite.setPos(447,675);
+                    bouton=unite.affichageUnite(Color.red);
+                    break;
+                case "Archer2":
+                    unite.setPos(204,495);
+                    bouton=unite.affichageUnite(Color.red);
+                    break;
+                case "Soldat2" :
+                    unite.setPos(343,615);
+                    bouton=unite.affichageUnite(Color.red);
+                    break;
+                case "Chevalier2":
+                    unite.setPos(308,435);
+                    bouton=unite.affichageUnite(Color.red);
+                    break;
+            }
+            this.add(bouton);
+        }
     }
 }

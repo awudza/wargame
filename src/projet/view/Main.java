@@ -1,5 +1,6 @@
 package projet.view;
 
+    import projet.modeles.Partie;
     import projet.modeles.Terrain;
     import projet.view.events.CelluleMouseEventListener;
 
@@ -8,6 +9,8 @@ package projet.view;
 public class Main{
 
             public static void main(String[] args) {
+
+
                 JFrame frame = new JFrame();
                 frame.setSize(1300, 900);
                 frame.setLocationRelativeTo(null);
@@ -20,6 +23,8 @@ public class Main{
                 terrain.setOpaque(false);
                 frame.add(terrain);
                 frame.add(background);
+                Partie partie=new Partie(1,terrain);
                 frame.setVisible(true);
+
             }
         }

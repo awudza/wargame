@@ -14,15 +14,24 @@ public class Joueur {
      * @param nom
      * @param prenom
      * @param pseudo
-     * @param score
      */
-    public Joueur(int id,String nom, String prenom, String pseudo, int score,Compagnie compagnie){
+    public Joueur(int id,String nom, String prenom, String pseudo){
         this.id=id;
         this.nom=nom;
         this.prenom=prenom;
-        this.score=score;
+        this.score=0;
         this.pseudo=pseudo;
-        this.compagnie=compagnie;
+        this.compagnie=new Compagnie(id,nom);
+
+    }
+
+    /**
+     *
+     * @return la compagnie du joueur
+     */
+
+    public Compagnie getCompagnie() {
+        return compagnie;
     }
 
     /**

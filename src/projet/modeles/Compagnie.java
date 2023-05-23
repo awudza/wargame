@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Compagnie {
     private int id;
     private String nom;
+
     private ArrayList<Unite> listUnite;
 
     /**
@@ -16,6 +17,7 @@ public class Compagnie {
         this.listUnite=new ArrayList<>();
         this.id=id;
         this.nom=nom;
+        this.creerUnites();
     }
 
     /**
@@ -76,5 +78,28 @@ public class Compagnie {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public void creerUnites(){
+        TypeUnite types=new TypeUnite();
+        ArrayList<TypeUnite> typeUnites=types.getTypesUnites();
+        Unite infanterie =new Unite("Soldat",true,typeUnites.get(0));
+        this.listUnite.add(infanterie);
+        Unite infanterieL=new Unite("Goliath",true,typeUnites.get(1));
+        this.listUnite.add(infanterieL);
+        Unite caval=new Unite("Chevalier",true,typeUnites.get(2));
+        this.listUnite.add(caval);
+        Unite mage=new Unite("Poter",true,typeUnites.get(3));
+        this.listUnite.add(mage);
+        Unite archer=new Unite("Archer1",true,typeUnites.get(4));
+        this.listUnite.add(archer);
+        Unite archer2=new Unite("Archer2",true,typeUnites.get(4));
+        this.listUnite.add(archer2);
+        Unite infanterie2=new Unite("Soldat2",true,typeUnites.get(0));
+        this.listUnite.add(infanterie2);
+        Unite caval2=new Unite("Chevalier2",true,typeUnites.get(0));
+        this.listUnite.add(caval2);
+
+
     }
 }
