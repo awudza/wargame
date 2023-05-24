@@ -21,7 +21,7 @@ public class Joueur {
         this.prenom=prenom;
         this.score=0;
         this.pseudo=pseudo;
-        this.compagnie=new Compagnie(id,nom);
+        this.compagnie=new Compagnie(id,nom,this);
 
     }
 

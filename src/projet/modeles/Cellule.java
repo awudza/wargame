@@ -65,10 +65,16 @@ public class Cellule extends Polygon{
         return id;
     }
 
+    public boolean getEtat() {
+        return etat;
+    }
+
     /**
      *
      * @return le type du terrain
      */
+
+
 
     public TypeTerrain getTypeTerrain() {
         return typeTerrain;

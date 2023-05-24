@@ -25,8 +25,8 @@ public class Partie {
     }
 
     public void AfficherUnite(){
-        this.terrain.afficherUnite1(this.joueur1);
-        this.terrain.afficherUnite2(this.joueur2);
+       this.terrain.afficherUnite(joueur1);
+       this.terrain.afficherUnite(joueur2);
     }
 
     /**

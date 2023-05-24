@@ -3,12 +3,14 @@ package projet.modeles;
 import java.util.ArrayList;
 
 public class TypeUnite {
+
     private String libelle;
     private int pAttaque;
     private int pDefense;
     private int pDeplacement;
     private int vision;
     private int pointDeVie;
+
 
     public TypeUnite(){
 
@@ -153,5 +155,13 @@ public class TypeUnite {
         return listTypeUnite;
     }
 
-
+    @Override
+    public String toString() {
+        return
+                "Points d'attaque: " + pAttaque + "\n"+
+                "Points de defense: " + pDefense + "\n"+
+                " Points de deplacement:" + pDeplacement + "\n"+
+                "Vision: " + vision + "\n"+
+                "Point De Vie: " + pointDeVie +"\n";
+    }
 }

@@ -1,6 +1,7 @@
 package projet.modeles;
 
 import projet.component.ComponentCellule;
+import projet.view.events.UniteListener;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -10,18 +11,36 @@ import java.util.ArrayList;
 public class Terrain extends JPanel {
     private int id;
 
+    private final int DIST = 69;
+    private Frame fenetre;
+
     public static int[] mouseInsideCoord = {-1, -1};
     private ArrayList<Cellule> listCellules;
     private int largeur = 1200;
     private int hauteur = 800;
 
+    private Cellule celDep;
+
+    private Unite uniteSelected;
+
     private final int W2 = largeur / 2;
     private final int H2 = hauteur / 2;
 
+    private ArrayList<JButton> listBouton;
+
+
     public Terrain(){
+        this.listBouton=new ArrayList<>();
+
+    }
+
+    public Terrain(Frame fenetre ){
         this.setLayout(null);
         listCellules=new ArrayList<>();
         setPreferredSize(new Dimension(largeur, hauteur));
+        this.fenetre=fenetre;
+        this.listBouton=new ArrayList<>();
+
     }
 
     /**
@@ -51,10 +70,20 @@ public class Terrain extends JPanel {
         this.hauteur = hauteur;
     }
 
+    public Cellule getCelDep() {
+        return celDep;
+    }
+
+    public void setCelDep(Cellule celDep) {
+        this.celDep = celDep;
+    }
+
     /**
      *
      * @param largeur
      */
+
+
 
     public void setLargeur(int largeur) {
         this.largeur = largeur;
@@ -104,7 +133,7 @@ public class Terrain extends JPanel {
             g.setColor(new Color(51,0,0));
             g.drawPolygon(cellule);
         }else{
-            g.setColor(new Color(255,255,255,0));
+            g.setColor(new Color(255,255,255,255));
             g.drawPolygon(cellule);
         }
         g.setColor(new Color(0xFFFFFF));
@@ -120,7 +149,7 @@ public class Terrain extends JPanel {
         g.setFont(new Font("Arial", Font.PLAIN, 12)); // Modifier la police et la taille selon vos besoins
 
         // Afficher les coordonnées de la case
-        //g.drawString(coordinates, textX, textY);
+        g.drawString(coordinates, textX, textY);
     }
 
     /**
@@ -135,101 +164,67 @@ public class Terrain extends JPanel {
         return null;
     }
 
-
-    public void afficherUnite1(Joueur joueur1) {
-        Compagnie compagnie=joueur1.getCompagnie();
+    public void afficherUnite(Joueur joueur) {
+        Compagnie compagnie=joueur.getCompagnie();
         ArrayList<Unite> listUnite=compagnie.getListUnite();
 
         for (Unite unite:listUnite){
-            JButton bouton = new JButton();
-
-
-            switch (unite.getNom()) {
-                case "Soldat":
-                    unite.setPos(1244,375);
-                    bouton=   unite.affichageUnite(Color.GREEN);
-                    break;
-                case "Goliath":
-                    unite.setPos(1070,315);
-                    bouton=unite.affichageUnite(Color.GREEN);
-                    break;
-
-                case "Chevalier":
-                    unite.setPos(1140,435);
-                    bouton=unite.affichageUnite(Color.GREEN);
-
-                    break;
-                case "Poter":
-                   unite.setPos(1070,195);
-                    bouton=unite.affichageUnite(Color.GREEN);
-                    break;
-                case "Archer1":
-                    unite.setPos(1140,95);
-                    bouton=unite.affichageUnite(Color.GREEN);
-                    break;
-                case "Archer2":
-                    unite.setPos(932,315);
-                    bouton=unite.affichageUnite(Color.GREEN);
-                    break;
-                case "Soldat2" :
-                    unite.setPos(932,435);
-                    bouton=unite.affichageUnite(Color.GREEN);
-                    break;
-                case "Chevalier2":
-                    unite.setPos(1105,615);
-                    bouton=unite.affichageUnite(Color.GREEN);
-                    break;
-            }
-            this.add(bouton);
+            afficheUniteItem(unite);
         }
+    }
+
+    public void afficheUniteItem(Unite unite){
+        JButton bouton = new JButton();
+        if(unite.getJoueur().getId()==1){
+            bouton=unite.affichageUnite(Color.red);
+        }else if(unite.getJoueur().getId()==2){
+            bouton=unite.affichageUnite(Color.BLUE);
+        }
+        bouton.addActionListener(new UniteListener(unite,this.fenetre,this,bouton));
+        this.add(bouton);
+        unite.setBouton(bouton);
+        this.listBouton.add(bouton);
 
     }
 
-    public void afficherUnite2(Joueur joueur2) {
-        Compagnie compagnie=joueur2.getCompagnie();
-        ArrayList<Unite> listUnite=compagnie.getListUnite();
+    public void setUniteSelected(Unite uniteSelected) {
+        this.uniteSelected = uniteSelected;
+    }
 
-        for (Unite unite:listUnite){
-            JButton bouton = new JButton();
+    public Unite getUniteSelected() {
+        return uniteSelected;
+    }
 
+    public void deplacer(Cellule cel) {
+        this.getUniteSelected().setBoutonPrec(this.getUniteSelected().getBouton());
+        afficheUniteItem(this.getUniteSelected());
+        this.remove(this.getUniteSelected().getBoutonPrec());
+    }
 
-            switch (unite.getNom()) {
-                case "Soldat":
-                    unite.setPos(101,686);
-                    bouton=unite.affichageUnite(Color.red);
-                    break;
-                case "Goliath":
-                    unite.setPos(239,675);
-                    bouton=unite.affichageUnite(Color.red);
-                    break;
+    public void annulerDeplacement(){
+        this.remove(this.getUniteSelected().getBouton());
+        JButton bouton=this.getUniteSelected().getBoutonPrec();
+        this.getUniteSelected().setPos(bouton.getX(), bouton.getY() );
+        this.afficheUniteItem(this.getUniteSelected());
+    }
 
-                case "Chevalier":
-                    unite.setPos(202,595);
-                    bouton=unite.affichageUnite(Color.red);
+    public void supprimerBoutonUnite(JButton bouton){
+        this.remove(bouton);
+    }
 
-                    break;
-                case "Poter":
-                    unite.setPos(308,806);
-                    bouton=unite.affichageUnite(Color.red);
-                    break;
-                case "Archer1":
-                    unite.setPos(447,675);
-                    bouton=unite.affichageUnite(Color.red);
-                    break;
-                case "Archer2":
-                    unite.setPos(204,495);
-                    bouton=unite.affichageUnite(Color.red);
-                    break;
-                case "Soldat2" :
-                    unite.setPos(343,615);
-                    bouton=unite.affichageUnite(Color.red);
-                    break;
-                case "Chevalier2":
-                    unite.setPos(308,435);
-                    bouton=unite.affichageUnite(Color.red);
-                    break;
-            }
-            this.add(bouton);
+    /**
+     *
+     * @param cel
+     * @param x
+     * @param y
+     * @return
+     */
+    public boolean verifierDeplacement(Cellule cel, int x, int y){
+        int distance = (int) Math.sqrt(Math.pow(cel.getCenter().x-x,2) + Math.pow(cel.getCenter().y - y, 2));
+        if(distance < this.getUniteSelected().getType().getpDeplacement() * DIST ){
+            return true;
+        }else{
+            return false;
         }
     }
 }

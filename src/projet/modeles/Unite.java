@@ -14,7 +14,11 @@ public class Unite {
     private int posX;
     private int posY;
 
+    private JButton boutonPrec;
+
     private JButton bouton;
+    private Joueur joueur;
+
 
 
     /**
@@ -29,8 +33,23 @@ public class Unite {
         this.etat=etat;
         this.type=type;
     }
+    public Unite(String nom, boolean etat,TypeUnite type,Joueur joueur){
+        this.degat=0;
+        this.nom=nom;
+        this.etat=etat;
+        this.type=type;
+        this.joueur=joueur;
+    }
 
-    public void setPos(int posX,int posY) {
+    public Joueur getJoueur() {
+        return joueur;
+    }
+
+    public void setJoueur(Joueur joueur) {
+        this.joueur = joueur;
+    }
+
+    public void setPos(int posX, int posY) {
         this.posX = posX;
         this.posY=posY;
     }
@@ -149,4 +168,39 @@ public class Unite {
         return bouton;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder info=new StringBuilder();
+        info.append("Nom: "+this.getNom()+"\n");
+        info.append("Type: "+this.getType().getLibelle()+"\n");
+        info.append(this.getType().toString());
+        info.append("Degat subit: \n");
+        info.append("Deplacer ?");
+
+        return info.toString();
+    }
+
+    public JButton getBouton() {
+        return bouton;
+    }
+
+    public JButton getBoutonPrec() {
+        return boutonPrec;
+    }
+
+    public void setBoutonPrec(JButton boutonPrec) {
+        this.boutonPrec = boutonPrec;
+    }
+
+    public void setBouton(JButton bouton) {
+        this.bouton = bouton;
+    }
+
+    public int getPosX() {
+        return posX;
+    }
+
+    public int getPosY() {
+        return posY;
+    }
 }
