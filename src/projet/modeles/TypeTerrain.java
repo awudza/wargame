@@ -1,23 +1,26 @@
 package projet.modeles;
 
+import java.util.ArrayList;
+
 public class TypeTerrain {
     private String nom;
-    private float bonusAttaque;
-    private float bonusDefense;
+//    private float bonusAttaque;
+    private int bonusDefense;
     private int pDeplacement;
+
+    private ArrayList<Integer[]> listCoord;
 
     /**
      * Constructeur de typeterrain avec tous ses attributs
      * @param nom
-     * @param bonusAttaque
      * @param bonusDefense
      * @param pDeplacement
      */
-    TypeTerrain(String nom,float bonusAttaque,float bonusDefense, int pDeplacement){
-        this.bonusAttaque=bonusAttaque;
+    TypeTerrain(String nom,int bonusDefense, int pDeplacement){
         this.nom=nom;
         this.bonusDefense=bonusDefense;
         this.pDeplacement=pDeplacement;
+        listCoord = new ArrayList<>();
     }
 
     /**
@@ -38,18 +41,18 @@ public class TypeTerrain {
 
     /**
      *
-     * @return le bonus de l'attaque
-     */
-    public float getBonusAttaque() {
-        return bonusAttaque;
-    }
-
-    /**
-     *
      * @return le bonus de defense
      */
     public float getBonusDefense() {
         return bonusDefense;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public ArrayList<Integer[]> getListCoord() {
+        return listCoord;
     }
 
     /**
@@ -69,22 +72,30 @@ public class TypeTerrain {
     }
 
     /**
-     * modifie le bonus de l'attaque
-     * @param bonusAttaque
-     */
-
-    public void setBonusAttaque(float bonusAttaque) {
-        this.bonusAttaque = bonusAttaque;
-    }
-
-    /**
      * modifie le bonus de defense
      * @param bonusDefense
      */
 
-    public void setBonusDefense(float bonusDefense) {
+    public void setBonusDefense(int bonusDefense) {
         this.bonusDefense = bonusDefense;
     }
 
+    /**
+     *
+     * @param listCoord
+     */
+    public void setListCoord(ArrayList<Integer[]> listCoord) {
+        this.listCoord = listCoord;
+    }
+
+    @Override
+    public String toString() {
+        return "TypeTerrain{" +
+                "nom='" + nom + '\'' +
+                ", bonusDefense=" + bonusDefense +
+                ", pDeplacement=" + pDeplacement +
+                ", listCoord=" + listCoord +
+                '}';
+    }
 }
 

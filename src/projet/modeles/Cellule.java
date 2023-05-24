@@ -6,6 +6,7 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.lang.reflect.Type;
+import java.util.Arrays;
 
 public class Cellule extends Polygon{
 
@@ -143,7 +144,27 @@ public class Cellule extends Polygon{
         }
     }
 
+    /**
+     *
+     * @param x
+     * @param y
+     * @return
+     */
     public boolean contain(int x,int y){
         return contains(x,y);
+    }
+
+    @Override
+    public String toString() {
+        return "Cellule{" +
+                "points=" + Arrays.toString(points) +
+                ", center=" + center +
+                ", radius=" + radius +
+                ", rotation=" + rotation +
+                ", id=" + id +
+                ", etat=" + etat +
+                ", terrain=" + terrain +
+                ", typeTerrain=" + typeTerrain +
+                '}';
     }
 }
