@@ -1,5 +1,7 @@
 package projet.modeles;
 
+import java.util.ArrayList;
+
 public class TypeUnite {
     private String libelle;
     private int pAttaque;
@@ -8,6 +10,10 @@ public class TypeUnite {
     private int vision;
     private int pointDeVie;
 
+
+    public TypeUnite(){
+
+    }
     /**
      * constructeur de TypeUnite avec tous ses attributs
      * @param libelle
@@ -126,5 +132,35 @@ public class TypeUnite {
      */
     public void setVision(int vision) {
         this.vision = vision;
+    }
+
+    /**
+     *
+     * @return une liste des types d'unité qu'il y a dans le jeu
+     */
+    public ArrayList<TypeUnite> getTypesUnites(){
+        ArrayList listTypeUnite=new ArrayList();
+        TypeUnite infanterie=new TypeUnite("Infanterie",5,3,6,4,28);
+        TypeUnite infanterieL=new TypeUnite("Infanterie Lourde",10,10,4,4,38);
+        TypeUnite cavalerie=new TypeUnite("Cavalerie",8,3,8,6,38);
+        TypeUnite mage=new TypeUnite("Mage",5,1,5,5,24);
+        TypeUnite archer=new TypeUnite("Archer",6,2,5,7,33);
+
+        listTypeUnite.add(infanterie);
+        listTypeUnite.add(infanterieL);
+        listTypeUnite.add(cavalerie);
+        listTypeUnite.add(mage);
+        listTypeUnite.add(archer);
+        return listTypeUnite;
+    }
+
+    @Override
+    public String toString() {
+        return
+                "Points d'attaque: " + pAttaque + "\n"+
+                        "Points de defense: " + pDefense + "\n"+
+                        " Points de deplacement:" + pDeplacement + "\n"+
+                        "Vision: " + vision + "\n"+
+                        "Point De Vie: " + pointDeVie +"\n";
     }
 }
