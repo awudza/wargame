@@ -1,16 +1,21 @@
 package projet.modeles;
 
+
+import projet.view.events.UniteListener;
+
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class Terrain extends JPanel {
     private int id;
 
+    private final int DIST = 69;
+    private Frame fenetre;
+
     public static int[] mouseInsideCoord = {-1, -1};
     private ArrayList<Cellule> listCellules;
-
     private TypeTerrain plaine;
     private TypeTerrain eauProfonde;
     private TypeTerrain village;
@@ -21,12 +26,19 @@ public class Terrain extends JPanel {
 
     private int largeur = 1200;
     private int hauteur = 800;
+    private Cellule celDep;
+
+    private Unite uniteSelected;
 
     private final int W2 = largeur / 2;
     private final int H2 = hauteur / 2;
 
+    private ArrayList<JButton> listBouton;
+
+
     public Terrain(){
         listCellules=new ArrayList<>();
+        this.listBouton=new ArrayList<>();
         setPreferredSize(new Dimension(largeur, hauteur));
         plaine = new TypeTerrain("Plaine", 1,20 );
         village = new TypeTerrain("Village", 1, 40);
@@ -36,6 +48,23 @@ public class Terrain extends JPanel {
         colline = new TypeTerrain("Colline", 2, 50);
         montagne = new TypeTerrain("Montagne", 2, 60);
         this.initTypesTerrain();
+    }
+
+    public Terrain(Frame fenetre ){
+        this.setLayout(null);
+        listCellules=new ArrayList<>();
+        setPreferredSize(new Dimension(largeur, hauteur));
+        this.fenetre=fenetre;
+        this.listBouton=new ArrayList<>();
+        plaine = new TypeTerrain("Plaine", 1,20 );
+        village = new TypeTerrain("Village", 1, 40);
+        forteresse = new TypeTerrain("Forteresse", 1, 60);
+        eauProfonde = new TypeTerrain("Eau profonde", 0,0);
+        foret = new TypeTerrain("Forêt", 2, 40);
+        colline = new TypeTerrain("Colline", 2, 50);
+        montagne = new TypeTerrain("Montagne", 2, 60);
+        this.initTypesTerrain();
+
     }
 
     /**
@@ -149,6 +178,71 @@ public class Terrain extends JPanel {
         for(Cellule cel: this.listCellules)
             if (cel.contain(x,y))return cel;
         return null;
+    }
+
+    public void afficherUnite(Joueur joueur) {
+        Compagnie compagnie=joueur.getCompagnie();
+        ArrayList<Unite> listUnite=compagnie.getListUnite();
+
+        for (Unite unite:listUnite){
+            afficheUniteItem(unite);
+        }
+    }
+
+    public void afficheUniteItem(Unite unite){
+        JButton bouton = new JButton();
+        if(unite.getJoueur().getId()==1){
+            bouton=unite.affichageUnite(Color.red);
+        }else if(unite.getJoueur().getId()==2){
+            bouton=unite.affichageUnite(Color.BLUE);
+        }
+        bouton.setOpaque(false);
+        bouton.addActionListener(new UniteListener(unite,this.fenetre,this,bouton));
+        this.add(bouton);
+        unite.setBouton(bouton);
+        this.listBouton.add(bouton);
+
+    }
+
+    public void setUniteSelected(Unite uniteSelected) {
+        this.uniteSelected = uniteSelected;
+    }
+
+    public Unite getUniteSelected() {
+        return uniteSelected;
+    }
+
+    public void deplacer(Cellule cel) {
+        this.getUniteSelected().setBoutonPrec(this.getUniteSelected().getBouton());
+        afficheUniteItem(this.getUniteSelected());
+        this.remove(this.getUniteSelected().getBoutonPrec());
+    }
+
+    public void annulerDeplacement(){
+        this.remove(this.getUniteSelected().getBouton());
+        JButton bouton=this.getUniteSelected().getBoutonPrec();
+        this.getUniteSelected().setPos(bouton.getX(), bouton.getY() );
+        this.afficheUniteItem(this.getUniteSelected());
+    }
+
+    public void supprimerBoutonUnite(JButton bouton){
+        this.remove(bouton);
+    }
+
+    /**
+     *
+     * @param cel
+     * @param x
+     * @param y
+     * @return
+     */
+    public boolean verifierDeplacement(Cellule cel, int x, int y){
+        int distance = (int) Math.sqrt(Math.pow(cel.getCenter().x-x,2) + Math.pow(cel.getCenter().y - y, 2));
+        if(distance < this.getUniteSelected().getType().getpDeplacement() * DIST ){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     private void initTypesTerrain(){
