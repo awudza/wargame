@@ -5,6 +5,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import projet.modeles.Terrain;
+import projet.modeles.Unite;
+
+import javax.swing.*;
+
 
 public class CelluleMouseEventListener extends MouseAdapter {
     private Terrain terrain;
@@ -27,10 +31,15 @@ public class CelluleMouseEventListener extends MouseAdapter {
     }
 
     public void mouseClicked(MouseEvent e) {
-//        System.out.println("Mouse clicked");
-//        System.out.println("Point => "+e.getPoint());
-//        System.out.println("Location => "+e.getLocationOnScreen());
+        Cellule cel = this.terrain.celluleContenant(e.getPoint().x, e.getPoint().y);
+        if (this.terrain.verifierDeplacement(cel, this.terrain.getUniteSelected().getPosX(), this.terrain.getUniteSelected().getPosY())) {
+            this.terrain.getUniteSelected().setPos(cel.getCenter().x-14,cel.getCenter().y-25);
+            this.terrain.deplacer(cel);
+        }else{
+            JOptionPane.showMessageDialog(terrain,"L'Unité ne dispose pas d'assez de point de vie pour effectuer ce déplacement");
+        }
     }
+
 
 
 }
