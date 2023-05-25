@@ -16,7 +16,7 @@ public class TypeTerrain {
      * @param bonusDefense
      * @param pDeplacement
      */
-    TypeTerrain(String nom,int bonusDefense, int pDeplacement){
+    TypeTerrain(String nom,int pDeplacement, int  bonusDefense){
         this.nom=nom;
         this.bonusDefense=bonusDefense;
         this.pDeplacement=pDeplacement;
