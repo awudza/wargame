@@ -32,6 +32,8 @@ public class TypeUnite {
         this.pointDeVie=pointDeVie;
     }
 
+
+
     /**
      *
      * @return le nombre de points de l'attaque
@@ -162,5 +164,11 @@ public class TypeUnite {
                         " Points de deplacement:" + pDeplacement + "\n"+
                         "Vision: " + vision + "\n"+
                         "Point De Vie: " + pointDeVie +"\n";
+    }
+
+    public String enregistrer() {
+        StringBuilder enr=new StringBuilder();
+        enr.append(getLibelle()+","+getpDeplacement()+","+getpDefense()+","+getpAttaque()+","+getPointDeVie()+","+getVision());
+        return enr.toString();
     }
 }

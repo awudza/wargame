@@ -18,12 +18,21 @@ public class Joueur {
     }
 
     /**
+     * constructeur vide de joueur
+     */
+    public Joueur(){}
+
+    /**
      *
      * @return la compagnie du joueur
      */
 
     public Compagnie getCompagnie() {
         return compagnie;
+    }
+
+    public void setCompagnie(Compagnie compagnie) {
+        this.compagnie = compagnie;
     }
 
     /**
@@ -59,4 +68,10 @@ public class Joueur {
         this.pseudo = pseudo;
     }
 
+    public String enregistrer() {
+        StringBuilder enr=new StringBuilder();
+        enr.append(this.pseudo+",");
+        enr.append(getCompagnie().enregistrer());
+        return enr.toString();
+    }
 }

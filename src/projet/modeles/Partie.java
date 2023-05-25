@@ -1,11 +1,8 @@
 package projet.modeles;
 
-import java.util.ArrayList;
-
 public class Partie {
     private int numPartie;
     private Terrain terrain;
-    private ArrayList<Joueur> joueurs;
     private Joueur joueur1;
     private Joueur joueur2;
 
@@ -15,13 +12,26 @@ public class Partie {
      * @param terrain
      */
     public Partie(int num,Terrain terrain,String pseudo1,String pseudo2){
-        this.joueurs=new ArrayList<>(2);
         this.joueur1=new Joueur(1,pseudo1);
         this.joueur2=new Joueur(2,pseudo2);
 
         this.numPartie=num;
         this.terrain=terrain;
         AfficherUnite();
+    }
+
+    public Partie(Joueur joueur1, Joueur joueur2){
+        this.joueur1=joueur1;
+        this.joueur2=joueur2;
+
+    }
+
+    public void setJoueur1(Joueur joueur1) {
+        this.joueur1 = joueur1;
+    }
+
+    public void setJoueur2(Joueur joueur2) {
+        this.joueur2 = joueur2;
     }
 
     public void AfficherUnite(){
@@ -44,23 +54,14 @@ public class Partie {
         this.terrain = terrain;
     }
 
-    /***
-     * ajout des joueur à la partie
-     * @param joueur
-     */
-    public void addJoueur(Joueur joueur){
-        this.joueurs.add(joueur);
-    }
-
-    /**
-     *
-     * @return la liste des joueurs
-     */
-    public ArrayList<Joueur> getJoueurs() {
-        return joueurs;
-    }
-
     public int getNumPartie() {
         return numPartie;
+    }
+
+    public String enregistrer(){
+        StringBuilder enregistrement=new StringBuilder();
+        enregistrement.append(this.joueur1.enregistrer()+this.joueur2.enregistrer());
+
+        return enregistrement.toString();
     }
 }

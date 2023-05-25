@@ -1,5 +1,7 @@
 package projet.view;
 
+import projet.view.events.ContinuerListener;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -30,6 +32,7 @@ public class FenetrePrincipal extends JFrame {
         JButton continuerButton = new JButton("Continuer");
         continuerButton.setFont(new Font("Arial", Font.BOLD, 30));
         continuerButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        continuerButton.addActionListener(new ContinuerListener(this));
 
         JButton optionButton = new JButton("Options");
         optionButton.setFont(new Font("Arial", Font.BOLD, 30));

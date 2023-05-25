@@ -23,6 +23,12 @@ public class Compagnie {
         this.creerUnites(joueur);
     }
 
+    public Compagnie(Joueur joueur){
+        this.listUnite=new ArrayList<>();
+        this.id= joueur.getId();
+        this.nom=joueur.getPseudo();
+    }
+
     /**
      * supprime l'unite de la liste
      * @param unite
@@ -46,6 +52,7 @@ public class Compagnie {
     public ArrayList<Unite> getListUnite() {
         return listUnite;
     }
+
 
     /**
      *
@@ -137,5 +144,13 @@ public class Compagnie {
             caval2.setPos(308,435);
             this.listUnite.add(caval2);
         }
+    }
+
+    public String enregistrer() {
+        StringBuilder enr=new StringBuilder();
+        for (Unite unite: listUnite){
+            enr.append(unite.enregistrer());
+        }
+        return enr.toString();
     }
 }

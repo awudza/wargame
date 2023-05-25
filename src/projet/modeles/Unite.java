@@ -21,6 +21,8 @@ public class Unite {
 
     private JButton bouton;
     private Joueur joueur;
+    private int pDeplacement;
+
 
 
     public Unite(){
@@ -38,6 +40,7 @@ public class Unite {
         this.nom=nom;
         this.etat=etat;
         this.type=type;
+        this.pDeplacement=type.getpDeplacement();
     }
     public Unite(String nom, boolean etat,TypeUnite type,Joueur joueur){
         this.degat=0;
@@ -70,6 +73,10 @@ public class Unite {
      */
     public String getNom() {
         return nom;
+    }
+
+    public int getpDeplacement() {
+        return pDeplacement;
     }
 
     /**
@@ -223,5 +230,11 @@ public class Unite {
 
     public int getPosY() {
         return posY;
+    }
+
+    public String enregistrer() {
+        StringBuilder enr=new StringBuilder();
+        enr.append(getNom()+","+etat+","+getType().enregistrer()+","+getPosX()+","+getPosY()+",");
+        return enr.toString();
     }
 }

@@ -1,7 +1,5 @@
 package projet.view;
 
-import projet.view.events.EnregistrerPseudoListener;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -37,7 +35,7 @@ public class FenetrePseudo extends JFrame {
         nameField2.setFont(new Font("Arial", Font.PLAIN, 16));
         nameField2.setPreferredSize(new Dimension(200, 30));
 
-        JButton saveButton = new JButton("Enregistrer");
+        JButton saveButton = new JButton("Demarrer la partie!");
         saveButton.setFont(new Font("Arial", Font.BOLD, 16));
         JButton retour=new JButton("Retour au Menu");
         retour.setFont(new Font("Arial", Font.BOLD, 18));
@@ -47,9 +45,18 @@ public class FenetrePseudo extends JFrame {
                 dispose();
             }
         });
-        String playerName = nameField.getText();
-        String playerName2 = nameField2.getText();
-        saveButton.addActionListener(new EnregistrerPseudoListener(this,playerName,playerName2));
+        saveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Effectuer les opérations de sauvegarde des noms des joueurs ici
+                String pseudo1=nameField.getText();
+                String pseudo2=nameField2.getText();
+                Home home = new Home(pseudo1,pseudo2);
+                home.main();
+                // Fermer l'interface du joueur
+                dispose();
+            }
+        });
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;

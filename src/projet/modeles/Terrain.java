@@ -182,9 +182,8 @@ public class Terrain extends JPanel {
 
     public void afficherUnite(Joueur joueur) {
         Compagnie compagnie=joueur.getCompagnie();
-        ArrayList<Unite> listUnite=compagnie.getListUnite();
 
-        for (Unite unite:listUnite){
+        for (Unite unite:compagnie.getListUnite()){
             afficheUniteItem(unite);
         }
     }
@@ -229,13 +228,7 @@ public class Terrain extends JPanel {
         this.remove(bouton);
     }
 
-    /**
-     *
-     * @param cel
-     * @param x
-     * @param y
-     * @return
-     */
+
 //    public boolean verifierDeplacement(Cellule cel, int x, int y){
 //        int distance = (int) Math.sqrt(Math.pow(cel.getCenter().x-x,2) + Math.pow(cel.getCenter().y - y, 2));
 //        if(distance < this.getUniteSelected().getType().getpDeplacement() * DIST ){
