@@ -10,6 +10,8 @@ public class Unite {
     private boolean etat;
     private int degat;
 
+    private boolean deplacer;
+
     private TypeUnite type;
 
     private int posX;
@@ -21,6 +23,9 @@ public class Unite {
     private Joueur joueur;
 
 
+    public Unite(){
+
+    }
 
     /**
      * Constructeur permettant d'initialiser tous les attributs d'une unité
@@ -89,7 +94,22 @@ public class Unite {
      */
     public void setNom(String nom) {
         this.nom = nom;
+    }
 
+    /**
+     *
+     * @return
+     */
+    public boolean getDeplacer() {
+        return deplacer;
+    }
+
+    /**
+     *
+     * @param deplacer
+     */
+    public void setDeplacer(boolean deplacer) {
+        this.deplacer = deplacer;
     }
 
     /**

@@ -236,13 +236,20 @@ public class Terrain extends JPanel {
      * @param y
      * @return
      */
-    public boolean verifierDeplacement(Cellule cel, int x, int y){
-        int distance = (int) Math.sqrt(Math.pow(cel.getCenter().x-x,2) + Math.pow(cel.getCenter().y - y, 2));
-        if(distance < this.getUniteSelected().getType().getpDeplacement() * DIST ){
-            return true;
-        }else{
-            return false;
+//    public boolean verifierDeplacement(Cellule cel, int x, int y){
+//        int distance = (int) Math.sqrt(Math.pow(cel.getCenter().x-x,2) + Math.pow(cel.getCenter().y - y, 2));
+//        if(distance < this.getUniteSelected().getType().getpDeplacement() * DIST ){
+//            return true;
+//        }else{
+//            return false;
+//        }
+//    }
+    public int verifierDeplacement(ArrayList<Cellule> chemin){
+        int valeur = 0;
+        for (Cellule cel : chemin){
+            valeur += cel.getTypeTerrain().getpDeplacement();
         }
+        return valeur;
     }
 
     private void initTypesTerrain(){
