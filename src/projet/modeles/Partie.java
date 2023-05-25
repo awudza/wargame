@@ -14,10 +14,10 @@ public class Partie {
      * @param num
      * @param terrain
      */
-    public Partie(int num,Terrain terrain){
+    public Partie(int num,Terrain terrain,String pseudo1,String pseudo2){
         this.joueurs=new ArrayList<>(2);
-        this.joueur1=new Joueur(1,"Testeur1","jd","tst1");
-        this.joueur2=new Joueur(2,"Testeur2","bd","tst2");
+        this.joueur1=new Joueur(1,pseudo1);
+        this.joueur2=new Joueur(2,pseudo2);
 
         this.numPartie=num;
         this.terrain=terrain;
