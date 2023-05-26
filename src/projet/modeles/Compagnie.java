@@ -1,5 +1,6 @@
 package projet.modeles;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class Compagnie {
@@ -10,12 +11,15 @@ public class Compagnie {
 
     private ArrayList<Unite> listUnite;
 
+    private ArrayList<JButton> listBoutons;
+
     /**
      * Constructeur de Compagnie avec tous ses attributs
      * @param id
      * @param nom
      */
     public Compagnie(int id,String nom,Joueur joueur){
+        this.listBoutons=new ArrayList<>();
         this.listUnite=new ArrayList<>();
         this.id=id;
         this.nom=nom;
@@ -90,6 +94,16 @@ public class Compagnie {
         this.id = id;
     }
 
+
+    public ArrayList<JButton> getListBoutons() {
+        for(Unite unite:listUnite){
+            listBoutons.add(unite.getBouton());
+
+        }
+        System.out.println(listUnite);
+        return listBoutons;
+    }
+
     public void creerUnites(Joueur joueur){
         TypeUnite types=new TypeUnite();
         ArrayList<TypeUnite> typeUnites=types.getTypesUnites();
@@ -118,6 +132,8 @@ public class Compagnie {
             Unite caval2 = new Unite("Chevalier2", true, typeUnites.get(0),joueur);
             caval2.setPos(1105,615);
             this.listUnite.add(caval2);
+            System.out.println(joueur.getId());
+            System.out.println(listUnite.size());
         }else if(joueur.getId()==2){
             Unite infanterie = new Unite("Soldat", true, typeUnites.get(0),joueur);
             infanterie.setPos(101,686);
@@ -143,6 +159,8 @@ public class Compagnie {
             Unite caval2 = new Unite("Chevalier2", true, typeUnites.get(0),joueur);
             caval2.setPos(308,435);
             this.listUnite.add(caval2);
+            System.out.println(joueur.getId());
+            System.out.println(listUnite.size());
         }
     }
 

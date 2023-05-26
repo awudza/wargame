@@ -38,11 +38,12 @@ public class Home {
         Partie partie = new Partie(1, terrain, this.pseudo1, this.pseudo2);
 
 
+
         JMenuBar menuBar = new JMenuBar();
         JMenu fichier = new JMenu("Fichier");
         JMenu action = new JMenu("Action");
         JMenuItem annuler = new JMenuItem("Annler mouvement");
-        JMenuItem valider = new JMenu("Valider");
+        JMenuItem valider = new JMenuItem("Valider");
         JMenuItem quitter = new JMenuItem("Quitter");
         JMenuItem retour = new JMenuItem("Retour au Menu");
         JMenuItem enregistrer = new JMenuItem("Enregistrer la partie");
@@ -61,17 +62,29 @@ public class Home {
             }
 
         });
+        valider.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                partie.demarrer();
+            }
+        });
         quitter.addActionListener(new QuitterListener());
         fichier.add(enregistrer);
         fichier.add(retour);
         fichier.add(quitter);
         action.add(annuler);
+
         action.add(valider);
+
+
+
         menuBar.add(fichier);
         menuBar.add(action);
         frame.setJMenuBar(menuBar);
         BackgroundTerrain background = new BackgroundTerrain();
         frame.setLayout(new OverlayLayout(frame.getContentPane()));
+
         annuler.addActionListener(new AnnulerListener(terrain));
         new CelluleMouseEventListener(terrain);
         terrain.setOpaque(false);
@@ -101,6 +114,7 @@ public class Home {
         JMenuItem quitter = new JMenuItem("Quitter");
         JMenuItem retour = new JMenuItem("Retour au Menu");
         JMenuItem enregistrer = new JMenuItem("Enregistrer la partie");
+
 
 
         Partie finalPartie = partie;

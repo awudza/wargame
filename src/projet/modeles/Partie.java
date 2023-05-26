@@ -1,10 +1,18 @@
 package projet.modeles;
 
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 public class Partie {
     private int numPartie;
     private Terrain terrain;
     private Joueur joueur1;
     private Joueur joueur2;
+
+    private int maxTour=1;
+
+    private Joueur joueurActif;
 
     /**
      * Constructer de la partie
@@ -17,7 +25,9 @@ public class Partie {
 
         this.numPartie=num;
         this.terrain=terrain;
+        this.joueurActif=this.joueur1;
         AfficherUnite();
+        this.joueurActif.jouer(joueur2);
     }
 
     public Partie(Joueur joueur1, Joueur joueur2){
@@ -58,10 +68,36 @@ public class Partie {
         return numPartie;
     }
 
+    /**
+     *
+     * @return les elements de la partie qu'o veut enregistrer dans un fichier
+     */
     public String enregistrer(){
         StringBuilder enregistrement=new StringBuilder();
         enregistrement.append(this.joueur1.enregistrer()+this.joueur2.enregistrer());
 
         return enregistrement.toString();
     }
+    private int nbTour=0;
+    private int tmp=0;
+
+public void demarrer(){
+
+
+if(nbTour<maxTour){
+    if(joueurActif==joueur1){
+        joueur2.jouer(joueur1);
+        joueurActif=joueur2;
+    }else{
+        joueur1.jouer(joueur2);
+        joueurActif=joueur1;
+    }
+    tmp++;
+}else {
+    JOptionPane.showMessageDialog(null,"Le jeu esst terminé");
+}
+    if(tmp%2==0){
+        nbTour+=1;
+    }
+}
 }

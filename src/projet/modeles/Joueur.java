@@ -1,9 +1,13 @@
 package projet.modeles;
 
+import javax.swing.*;
+import java.util.ArrayList;
+
 public class Joueur {
     private int id;
     private String pseudo;
     private Compagnie compagnie;
+
 
     /**
      * cette fonction est le constructeur de joueur qui permet d'initialiser tous ses attributs
@@ -73,5 +77,17 @@ public class Joueur {
         enr.append(this.pseudo+",");
         enr.append(getCompagnie().enregistrer());
         return enr.toString();
+    }
+    public void jouer(Joueur joueur){
+        //recuperer la liste des boutons du joueur qui ne joue pas et les desactiver
+        for(JButton button:joueur.getCompagnie().getListBoutons()){
+            button.setEnabled(false);
+        };
+        System.out.println(joueur.getCompagnie().getListBoutons().size());
+        //recuperer la liste des boutons du joueur qui joue et les réactiver
+        for (JButton button2:this.getCompagnie().getListBoutons()){
+            button2.setEnabled(true);
+        }
+
     }
 }

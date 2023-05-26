@@ -186,6 +186,7 @@ public class Terrain extends JPanel {
         for (Unite unite:compagnie.getListUnite()){
             afficheUniteItem(unite);
         }
+
     }
 
     public void afficheUniteItem(Unite unite){
