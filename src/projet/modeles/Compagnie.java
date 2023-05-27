@@ -101,7 +101,6 @@ public class Compagnie {
             listBoutons.add(unite.getBouton());
 
         }
-        System.out.println(listUnite);
         return listBoutons;
     }
 
@@ -133,8 +132,6 @@ public class Compagnie {
             Unite caval2 = new Unite("Chevalier2", true, typeUnites.get(0),joueur);
             caval2.setPos(1105,615);
             this.listUnite.add(caval2);
-            System.out.println(joueur.getId());
-            System.out.println(listUnite.size());
         }else if(joueur.getId()==2){
             Unite infanterie = new Unite("Soldat", true, typeUnites.get(0),joueur);
             infanterie.setPos(101,686);
@@ -160,8 +157,6 @@ public class Compagnie {
             Unite caval2 = new Unite("Chevalier2", true, typeUnites.get(0),joueur);
             caval2.setPos(308,435);
             this.listUnite.add(caval2);
-            System.out.println(joueur.getId());
-            System.out.println(listUnite.size());
         }
     }
 

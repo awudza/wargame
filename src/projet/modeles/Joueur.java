@@ -81,20 +81,21 @@ public class Joueur {
     public void jouer(Joueur joueur){
         //recuperer la liste des boutons du joueur qui ne joue pas et les desactiver
         for(JButton button:joueur.getCompagnie().getListBoutons()){
+            this.resetPtDeDeplacement();
             button.setEnabled(false);
         };
-        System.out.println(joueur.getCompagnie().getListBoutons().size());
         //recuperer la liste des boutons du joueur qui joue et les réactiver
         for (JButton button2:this.getCompagnie().getListBoutons()){
+            this.resetPtDeDeplacement();
             button2.setEnabled(true);
         }
 
     }
 
     public void resetPtDeDeplacement(){
-
         for(Unite unite: this.getCompagnie().getListUnite()){
             unite.setpDeplacement(unite.getType().getpDeplacement());
+
            // System.out.println(unite.getType().getpDeplacement());
         }
     }

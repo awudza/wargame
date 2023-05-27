@@ -18,6 +18,8 @@ public class Cellule extends Polygon{
     private int rotation = 90;
     private int id;
     private boolean etat;
+
+    private Unite unite;
     private Terrain terrain;
     private TypeTerrain typeTerrain;
 
@@ -132,6 +134,23 @@ public class Cellule extends Polygon{
 
     /**
      *
+     * @return l'unite qui est dans la cellule
+     */
+    public Unite getUnite() {
+        return unite;
+    }
+
+    /**
+     * set l'unite
+     * @param unite
+     */
+
+    public void setUnite(Unite unite) {
+        this.unite = unite;
+    }
+
+    /**
+     *
      */
     protected void modifierPoints() {
         for (int p = 0; p < SIDES; p++) {
@@ -140,7 +159,6 @@ public class Cellule extends Polygon{
             xpoints[p] = point.x;
             ypoints[p] = point.y;
             points[p] = point;
-//            System.out.printf("%d. (%d, %d)\n", p, point.x, point.y);
         }
     }
 

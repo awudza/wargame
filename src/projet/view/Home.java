@@ -67,6 +67,7 @@ public class Home {
             public void actionPerformed(ActionEvent e) {
 
                 partie.demarrer();
+                frame.setTitle("C'est au tour de: "+partie.getJoueurActif().getPseudo()+" de jouer");
             }
         });
         quitter.addActionListener(new QuitterListener());
@@ -74,7 +75,8 @@ public class Home {
         fichier.add(retour);
         fichier.add(quitter);
         action.add(annuler);
-
+        frame.setTitle("C'est au tour de: "+partie.getJoueurActif().getPseudo()+" de jouer");
+        terrain.setUnite(partie);
         action.add(valider);
 
 

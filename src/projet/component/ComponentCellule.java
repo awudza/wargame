@@ -18,7 +18,6 @@ public class ComponentCellule extends JPanel implements MouseListener{
         }
     @Override
     public void mouseClicked(MouseEvent e) {
-        System.out.println("Mouse clicked tstrsgdgdy");
         System.out.println("Point => "+e.getPoint());
         System.out.println("Location => "+e.getLocationOnScreen());
     }
@@ -35,7 +34,7 @@ public class ComponentCellule extends JPanel implements MouseListener{
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        System.out.println("entryyyyyyyyyyyyyyyyy");
+        
     }
 
     @Override

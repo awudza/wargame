@@ -10,8 +10,9 @@ public class Unite {
     private String nom;
     private boolean etat;
     private int degat;
-
     private boolean deplacer;
+
+    private Cellule cel;
 
     private TypeUnite type;
 
@@ -130,6 +131,24 @@ public class Unite {
      */
     public void setDeplacer(boolean deplacer) {
         this.deplacer = deplacer;
+    }
+
+    /**
+     *
+     * @ cellule
+     */
+
+    public Cellule getCel() {
+        return cel;
+    }
+
+    /**
+     *setCellule
+     * @param cel
+     */
+
+    public void setCel(Cellule cel) {
+        this.cel = cel;
     }
 
     /**
@@ -276,4 +295,5 @@ public class Unite {
             return false;
         }
     }
+
 }

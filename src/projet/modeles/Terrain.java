@@ -14,6 +14,8 @@ public class Terrain extends JPanel {
     private final int DIST = 70;
     private Frame fenetre;
 
+    private ArrayList<Unite> listUnite;
+
     public static int[] mouseInsideCoord = {-1, -1};
     private ArrayList<Cellule> listCellules;
     private TypeTerrain plaine;
@@ -23,6 +25,7 @@ public class Terrain extends JPanel {
     private TypeTerrain foret;
     private TypeTerrain colline;
     private TypeTerrain forteresse;
+    private Partie partie;
 
     private int largeur = 1200;
     private int hauteur = 800;
@@ -50,6 +53,7 @@ public class Terrain extends JPanel {
         this.initTypesTerrain();
     }
 
+
     public Terrain(Frame fenetre ){
         this.setLayout(null);
         listCellules=new ArrayList<>();
@@ -65,6 +69,14 @@ public class Terrain extends JPanel {
         montagne = new TypeTerrain("Montagne", 2, 60);
         this.initTypesTerrain();
 
+    }
+
+    /**
+     *
+     * @param partie
+     */
+    public void setUnite(Partie partie){
+        this.listUnite=partie.getListUnite();
     }
 
     /**
@@ -140,6 +152,10 @@ public class Terrain extends JPanel {
         }
     }
 
+    public void setPartie(Partie partie) {
+        this.partie = partie;
+    }
+
     private void dessinerHexagone(Graphics g, int x, int y, int r) {
         Cellule cellule = new Cellule(x, y, r);
         this.listCellules.add(addTypeTerrain(cellule));
@@ -176,7 +192,8 @@ public class Terrain extends JPanel {
      */
     public Cellule celluleContenant(int x,int y){
         for(Cellule cel: this.listCellules)
-            if (cel.contain(x,y))return cel;
+            if (cel.contain(x,y))
+                return cel;
         return null;
     }
 
@@ -215,7 +232,14 @@ public class Terrain extends JPanel {
     public void deplacer(Cellule cel) {
         this.getUniteSelected().setBoutonPrec(this.getUniteSelected().getBouton());
         afficheUniteItem(this.getUniteSelected());
+        cel.setUnite(this.getUniteSelected());
+        cel.setEtat(true);
+        Cellule celPrec=this.celluleContenant(this.uniteSelected.getBoutonPrec().getX(),this.uniteSelected.getBoutonPrec().getX());
+        celPrec.setUnite(null);
+        celPrec.setEtat(false);
+        this.setUnite(this.partie);
         this.remove(this.getUniteSelected().getBoutonPrec());
+
     }
 
     public void annulerDeplacement(){
@@ -232,7 +256,6 @@ public class Terrain extends JPanel {
 
    public boolean verifierPossibiliteDeDeplacer(Cellule cel,Unite u){
     int  distance = (int) Math.sqrt(Math.pow((cel.getCenter().x-(u.getPosX()+14)),2) + Math.pow((cel.getCenter().y - (u.getPosY()+25)), 2));
-       System.out.println("Distance :"+distance);
        if(distance <=  DIST){
             return true;
        }else{

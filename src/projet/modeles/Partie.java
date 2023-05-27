@@ -1,6 +1,7 @@
 package projet.modeles;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 
 public class Partie {
@@ -10,7 +11,7 @@ public class Partie {
     private Joueur joueur2;
 
     private int maxTour=1;
-
+    private ArrayList<Unite> listUnite;
     private Joueur joueurActif;
 
     /**
@@ -21,17 +22,20 @@ public class Partie {
     public Partie(int num,Terrain terrain,String pseudo1,String pseudo2){
         this.joueur1=new Joueur(1,pseudo1);
         this.joueur2=new Joueur(2,pseudo2);
+        terrain.setPartie(this);
 
         this.numPartie=num;
         this.terrain=terrain;
         this.joueurActif=this.joueur1;
         AfficherUnite();
         this.joueurActif.jouer(joueur2);
+        this.listUnite=new ArrayList<>();
     }
 
     public Partie(Joueur joueur1, Joueur joueur2){
         this.joueur1=joueur1;
         this.joueur2=joueur2;
+        this.listUnite=new ArrayList<>();
 
     }
 
@@ -72,7 +76,9 @@ public class Partie {
      * @param terrain
      */
     public void setTerrain(Terrain terrain) {
+
         this.terrain = terrain;
+        this.terrain.setPartie(this);
     }
 
     public int getNumPartie() {
@@ -121,5 +127,17 @@ if(nbTour<maxTour){
     }
 }
 
+    public Joueur getJoueurActif() {
+        return joueurActif;
+    }
 
+    public ArrayList<Unite> getListUnite() {
+    this.listUnite.clear();
+    this.listUnite=this.joueur1.getCompagnie().getListUnite();
+    for(Unite unite:this.joueur2.getCompagnie().getListUnite()){
+        this.listUnite.add(unite);
+    }
+    return this.listUnite;
+
+    }
 }

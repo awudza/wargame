@@ -36,7 +36,6 @@ public class ContinuerListener implements ActionListener {
             while (scanner.hasNext()) {
                 String element=scanner.next();
                 lecture.add(element);
-                System.out.println(element);
             }
             //fermeture du scanner
 
