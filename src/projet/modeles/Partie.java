@@ -39,6 +39,7 @@ public class Partie {
      * cette fonction permet de redemarer le jeu en appuyant sur le bouton continuer
      */
     public void resetDemarer(){
+        this.joueurActif.resetPtDeDeplacement();
         if(joueurActif==joueur1){
             this.joueurActif.jouer(joueur2);
         }else{

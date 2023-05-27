@@ -90,4 +90,12 @@ public class Joueur {
         }
 
     }
+
+    public void resetPtDeDeplacement(){
+
+        for(Unite unite: this.getCompagnie().getListUnite()){
+            unite.setpDeplacement(unite.getType().getpDeplacement());
+           // System.out.println(unite.getType().getpDeplacement());
+        }
+    }
 }
