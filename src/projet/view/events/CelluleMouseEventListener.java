@@ -39,35 +39,26 @@ public class CelluleMouseEventListener extends MouseAdapter {
 //                    }
 //                }
 //            }
-            if(dep && !this.contient(cel)){
-                initDeplacement(this.terrain.getUniteSelected(), cel);
-            }
         }
 
     }
 
     public void mouseClicked(MouseEvent e) {
         Cellule cel = this.terrain.celluleContenant(e.getPoint().x, e.getPoint().y);
-        if(this.terrain.getUniteSelected() != null){
-            if(dep){
-                if (this.terrain.getUniteSelected().getType().getpDeplacement() - this.terrain.verifierDeplacement(this.chemin) >= 0) {
-                    this.terrain.getUniteSelected().setPos(cel.getCenter().x-14,cel.getCenter().y-25);
-                    this.terrain.deplacer(cel);
-                    this.terrain.getUniteSelected().getType().setpDeplacement(this.terrain.getUniteSelected().getType().getpDeplacement() - this.terrain.verifierDeplacement(this.chemin));
-                    dep = false;
-                }else{
-                    JOptionPane.showMessageDialog(terrain,"L'unité ne dispose pas d'assez de point de vie pour effectuer ce déplacement.");
-                    this.terrain.setUniteSelected(new Unite());
-                }
-            }else {
-                if (this.terrain.getUniteSelected().getDeplacer()) {
-                    if (cel.getCenter().x == (this.terrain.getUniteSelected().getPosX()+14) && cel.getCenter().y == (this.terrain.getUniteSelected().getPosY()+25)) {
-                        dep = true;
-                        this.chemin.add(cel);
-                    }
-                }
+        if(terrain.verifierPossibiliteDeDeplacer(cel,this.terrain.getUniteSelected())==true || this.terrain.verifierLesPointsDeDeplacement(cel,this.terrain.getUniteSelected())==true) {
+            this.terrain.getUniteSelected().setPos(cel.getCenter().x - 14, cel.getCenter().y - 25);
+            this.terrain.deplacer(cel);
+            this.terrain.getUniteSelected().setpDeplacement(this.terrain.getUniteSelected().getpDeplacement() -cel.getTypeTerrain().getpDeplacement() );
+        }else {
+            if(terrain.verifierPossibiliteDeDeplacer(cel,this.terrain.getUniteSelected())==false){
+                JOptionPane.showMessageDialog(null,"Vous devez deplacer les unités de case en case");
+
+            }else{
+                JOptionPane.showMessageDialog(null,"Vous n'avez pas assez de point de deplacement pour effectuer ce deplacement");
+
             }
         }
+
     }
 
     private void initDeplacement(Unite unite, Cellule cel){

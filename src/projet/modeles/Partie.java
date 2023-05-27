@@ -1,8 +1,7 @@
 package projet.modeles;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 
 public class Partie {
     private int numPartie;
@@ -34,6 +33,17 @@ public class Partie {
         this.joueur1=joueur1;
         this.joueur2=joueur2;
 
+    }
+
+    /**
+     * cette fonction permet de redemarer le jeu en appuyant sur le bouton continuer
+     */
+    public void resetDemarer(){
+        if(joueurActif==joueur1){
+            this.joueurActif.jouer(joueur2);
+        }else{
+            this.joueurActif.jouer(joueur1);
+        }
     }
 
     public void setJoueur1(Joueur joueur1) {
@@ -74,10 +84,19 @@ public class Partie {
      */
     public String enregistrer(){
         StringBuilder enregistrement=new StringBuilder();
-        enregistrement.append(this.joueur1.enregistrer()+this.joueur2.enregistrer());
+        if(this.joueurActif==joueur1){
+            enregistrement.append(this.joueur1.enregistrer()+this.joueur2.enregistrer()+"1");
+        }else if(this.joueurActif==joueur2){
+            enregistrement.append(this.joueur1.enregistrer()+this.joueur2.enregistrer()+"2");
+        }
 
         return enregistrement.toString();
     }
+
+    public void setJoueurActif(Joueur joueurActif) {
+        this.joueurActif = joueurActif;
+    }
+
     private int nbTour=0;
     private int tmp=0;
 
@@ -100,4 +119,6 @@ if(nbTour<maxTour){
         nbTour+=1;
     }
 }
+
+
 }

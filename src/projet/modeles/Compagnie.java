@@ -28,6 +28,7 @@ public class Compagnie {
     }
 
     public Compagnie(Joueur joueur){
+        this.listBoutons=new ArrayList<>();
         this.listUnite=new ArrayList<>();
         this.id= joueur.getId();
         this.nom=joueur.getPseudo();

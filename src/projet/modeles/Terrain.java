@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class Terrain extends JPanel {
     private int id;
 
-    private final int DIST = 69;
+    private final int DIST = 70;
     private Frame fenetre;
 
     public static int[] mouseInsideCoord = {-1, -1};
@@ -230,14 +230,21 @@ public class Terrain extends JPanel {
     }
 
 
-//    public boolean verifierDeplacement(Cellule cel, int x, int y){
-//        int distance = (int) Math.sqrt(Math.pow(cel.getCenter().x-x,2) + Math.pow(cel.getCenter().y - y, 2));
-//        if(distance < this.getUniteSelected().getType().getpDeplacement() * DIST ){
-//            return true;
-//        }else{
-//            return false;
-//        }
-//    }
+   public boolean verifierPossibiliteDeDeplacer(Cellule cel,Unite u){
+    int  distance = (int) Math.sqrt(Math.pow(cel.getCenter().x-(u.getPosX()-14),2) + Math.pow(cel.getCenter().y - (u.getPosY()-25), 2));
+       if(distance <  DIST){
+            return true;
+       }else{
+           return false;}
+}
+
+public boolean verifierLesPointsDeDeplacement(Cellule cel,Unite u){
+        if(u.getpDeplacement()-cel.getTypeTerrain().getpDeplacement()<=0){
+            return false;
+        }else {
+            return true;
+        }
+}
     public int verifierDeplacement(ArrayList<Cellule> chemin){
         int valeur = 0;
         for (Cellule cel : chemin){

@@ -22,6 +22,7 @@ public class Unite {
     private JButton bouton;
     private Joueur joueur;
     private int pDeplacement;
+  private  int pDeVie;
 
 
 
@@ -41,6 +42,7 @@ public class Unite {
         this.etat=etat;
         this.type=type;
         this.pDeplacement=type.getpDeplacement();
+        this.pDeVie=this.type.getPointDeVie();
     }
     public Unite(String nom, boolean etat,TypeUnite type,Joueur joueur){
         this.degat=0;
@@ -48,6 +50,8 @@ public class Unite {
         this.etat=etat;
         this.type=type;
         this.joueur=joueur;
+        this.pDeplacement=this.type.getpDeplacement();
+        this.pDeVie=this.type.getPointDeVie();
     }
 
     public Joueur getJoueur() {
@@ -101,6 +105,14 @@ public class Unite {
      */
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public void setpDeVie(int pDeVie) {
+        this.pDeVie = pDeVie;
+    }
+
+    public int getpDeVie() {
+        return pDeVie;
     }
 
     /**
@@ -188,6 +200,7 @@ public class Unite {
 
         bouton.setToolTipText(tooltip);
         ImageIcon imageIcon = new ImageIcon(getClass().getResource(imagePath));
+        this.type.setImageIcon(imageIcon);
         Image image = imageIcon.getImage();
         Image resizedImage = image.getScaledInstance(bouton.getWidth(), bouton.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon resizedIcon = new ImageIcon(resizedImage);
@@ -201,7 +214,9 @@ public class Unite {
         StringBuilder info=new StringBuilder();
         info.append("Nom: "+this.getNom()+"\n");
         info.append("Type: "+this.getType().getLibelle()+"\n");
+        info.append("Point de deplacement restant: "+this.getpDeplacement()+"\n");
         info.append(this.getType().toString());
+        info.append("Point de vie :"+this.pDeVie+"\n");
         info.append("Degat subit: \n");
         info.append("Deplacer ?");
 
@@ -224,6 +239,14 @@ public class Unite {
         this.bouton = bouton;
     }
 
+    /**
+     * set le point de deplacement
+     * @param pDeplacement
+     */
+    public void setpDeplacement(int pDeplacement) {
+        this.pDeplacement = pDeplacement;
+    }
+
     public int getPosX() {
         return posX;
     }
@@ -234,7 +257,7 @@ public class Unite {
 
     public String enregistrer() {
         StringBuilder enr=new StringBuilder();
-        enr.append(getNom()+","+etat+","+getType().enregistrer()+","+getPosX()+","+getPosY()+",");
+        enr.append(getNom()+","+etat+","+getType().enregistrer()+","+getPosX()+","+getPosY()+","+getpDeplacement()+","+getpDeVie()+",");
         return enr.toString();
     }
 }

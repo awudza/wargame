@@ -131,6 +131,8 @@ public class Home {
             }
 
         });
+
+        finalPartie.resetDemarer();
         quitter.addActionListener(new QuitterListener());
         fichier.add(enregistrer);
         fichier.add(retour);
@@ -140,6 +142,13 @@ public class Home {
         menuBar.add(fichier);
         menuBar.add(action);
         frame.setJMenuBar(menuBar);
+        valider.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                finalPartie.demarrer();
+            }
+        });
         BackgroundTerrain background = new BackgroundTerrain();
         frame.setLayout(new OverlayLayout(frame.getContentPane()));
         annuler.addActionListener(new AnnulerListener(terrain));

@@ -51,10 +51,15 @@ public class FenetrePseudo extends JFrame {
                 // Effectuer les opérations de sauvegarde des noms des joueurs ici
                 String pseudo1=nameField.getText();
                 String pseudo2=nameField2.getText();
-                Home home = new Home(pseudo1,pseudo2);
-                home.main();
-                // Fermer l'interface du joueur
-                dispose();
+
+                if(pseudo1.isEmpty() || pseudo2.isEmpty()){
+                    JOptionPane.showMessageDialog(null,"Vous devez entrer les pseudos pour pouvoir commencer la partie");
+                }else{
+                    Home home = new Home(pseudo1,pseudo2);
+                    home.main();
+                    // Fermer l'interface du joueur
+                    dispose();
+                }
             }
         });
 

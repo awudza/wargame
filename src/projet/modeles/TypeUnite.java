@@ -1,5 +1,7 @@
 package projet.modeles;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 
 public class TypeUnite {
@@ -9,6 +11,8 @@ public class TypeUnite {
     private int pDeplacement;
     private int vision;
     private int pointDeVie;
+
+    private ImageIcon imageIcon;
 
 
     public TypeUnite(){
@@ -88,6 +92,22 @@ public class TypeUnite {
     }
 
     /**
+     *
+     * @return l'image du type
+     */
+    public ImageIcon getImageIcon() {
+        return imageIcon;
+    }
+
+    /**
+     * set l'image Icon
+     * @param imageIcon
+     */
+    public void setImageIcon(ImageIcon imageIcon) {
+        this.imageIcon = imageIcon;
+    }
+
+    /**
      * modifiez le libelle du type d'unite
      * @param libelle
      */
@@ -161,9 +181,8 @@ public class TypeUnite {
         return
                 "Points d'attaque: " + pAttaque + "\n"+
                         "Points de defense: " + pDefense + "\n"+
-                        " Points de deplacement:" + pDeplacement + "\n"+
-                        "Vision: " + vision + "\n"+
-                        "Point De Vie: " + pointDeVie +"\n";
+                        "Points de deplacement maximum:" + pDeplacement + "\n"+
+                        "Vision: " + vision + "\n";
     }
 
     public String enregistrer() {
