@@ -231,8 +231,9 @@ public class Terrain extends JPanel {
 
 
    public boolean verifierPossibiliteDeDeplacer(Cellule cel,Unite u){
-    int  distance = (int) Math.sqrt(Math.pow(cel.getCenter().x-(u.getPosX()-14),2) + Math.pow(cel.getCenter().y - (u.getPosY()-25), 2));
-       if(distance <  DIST){
+    int  distance = (int) Math.sqrt(Math.pow((cel.getCenter().x-(u.getPosX()+14)),2) + Math.pow((cel.getCenter().y - (u.getPosY()+25)), 2));
+       System.out.println("Distance :"+distance);
+       if(distance <=  DIST){
             return true;
        }else{
            return false;}

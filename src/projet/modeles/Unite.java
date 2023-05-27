@@ -4,6 +4,7 @@ package projet.modeles;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.util.Random;
 
 public class Unite {
     private String nom;
@@ -259,5 +260,20 @@ public class Unite {
         StringBuilder enr=new StringBuilder();
         enr.append(getNom()+","+etat+","+getType().enregistrer()+","+getPosX()+","+getPosY()+","+getpDeplacement()+","+getpDeVie()+",");
         return enr.toString();
+    }
+
+    public boolean attaquer(Unite unite, Cellule cellule){
+        Random random = new Random();
+        int pDefense = unite.getType().getpDefense() + (int)((unite.getType().getpDefense() * cellule.getTypeTerrain().getBonusDefense())/100);
+        int dBrute = this.getType().getpAttaque() - pDefense;
+        int degat = dBrute + (random.nextInt((int)(0.5*dBrute) - (int)(-0.5*dBrute)) + (int)(-0.5*dBrute));
+        int pv = unite.getpDeVie()-degat;
+        unite.setDegat(degat);
+        unite.setpDeVie(pv);
+        if(pv>0){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

@@ -45,12 +45,12 @@ public class CelluleMouseEventListener extends MouseAdapter {
 
     public void mouseClicked(MouseEvent e) {
         Cellule cel = this.terrain.celluleContenant(e.getPoint().x, e.getPoint().y);
-        if(terrain.verifierPossibiliteDeDeplacer(cel,this.terrain.getUniteSelected())==true || this.terrain.verifierLesPointsDeDeplacement(cel,this.terrain.getUniteSelected())==true) {
+        if(terrain.verifierPossibiliteDeDeplacer(cel,this.terrain.getUniteSelected()) && this.terrain.verifierLesPointsDeDeplacement(cel,this.terrain.getUniteSelected())) {
             this.terrain.getUniteSelected().setPos(cel.getCenter().x - 14, cel.getCenter().y - 25);
             this.terrain.deplacer(cel);
             this.terrain.getUniteSelected().setpDeplacement(this.terrain.getUniteSelected().getpDeplacement() -cel.getTypeTerrain().getpDeplacement() );
         }else {
-            if(terrain.verifierPossibiliteDeDeplacer(cel,this.terrain.getUniteSelected())==false){
+            if(!terrain.verifierPossibiliteDeDeplacer(cel,this.terrain.getUniteSelected())){
                 JOptionPane.showMessageDialog(null,"Vous devez deplacer les unités de case en case");
 
             }else{
