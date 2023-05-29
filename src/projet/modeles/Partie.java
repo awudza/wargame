@@ -27,9 +27,10 @@ public class Partie {
         this.numPartie=num;
         this.terrain=terrain;
         this.joueurActif=this.joueur1;
+        this.terrain.setListUnite(joueur1.getCompagnie().getListUnite());
+        this.terrain.setListUnite(joueur2.getCompagnie().getListUnite());
         AfficherUnite();
-        this.joueurActif.jouer(joueur2);
-        this.listUnite=new ArrayList<>();
+        demarrer();
     }
 
     public Partie(Joueur joueur1, Joueur joueur2){
@@ -45,9 +46,9 @@ public class Partie {
     public void resetDemarer(){
         this.joueurActif.resetPtDeDeplacement();
         if(joueurActif==joueur1){
-            this.joueurActif.jouer(joueur2);
+            this.joueur1.jouer(joueur2);
         }else{
-            this.joueurActif.jouer(joueur1);
+            this.joueur2.jouer(joueur1);
         }
     }
 
@@ -112,11 +113,11 @@ public void demarrer(){
 
 if(nbTour<maxTour){
     if(joueurActif==joueur1){
-        joueur2.jouer(joueur1);
         joueurActif=joueur2;
+        joueur2.jouer(joueur1);
     }else{
-        joueur1.jouer(joueur2);
         joueurActif=joueur1;
+        joueur1.jouer(joueur2);
     }
     tmp++;
 }else {

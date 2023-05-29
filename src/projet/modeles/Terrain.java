@@ -14,7 +14,7 @@ public class Terrain extends JPanel {
     private final int DIST = 70;
     private Frame fenetre;
 
-    private ArrayList<Unite> listUnite;
+
 
     public static int[] mouseInsideCoord = {-1, -1};
     private ArrayList<Cellule> listCellules;
@@ -38,6 +38,8 @@ public class Terrain extends JPanel {
 
     private ArrayList<JButton> listBouton;
 
+    private ArrayList<Unite> listUnite;
+
 
     public Terrain(){
         listCellules=new ArrayList<>();
@@ -51,6 +53,7 @@ public class Terrain extends JPanel {
         colline = new TypeTerrain("Colline", 2, 50);
         montagne = new TypeTerrain("Montagne", 2, 60);
         this.initTypesTerrain();
+        this.listUnite=new ArrayList<>();
     }
 
 
@@ -68,6 +71,7 @@ public class Terrain extends JPanel {
         colline = new TypeTerrain("Colline", 2, 50);
         montagne = new TypeTerrain("Montagne", 2, 60);
         this.initTypesTerrain();
+        this.listUnite=new ArrayList<>();
 
     }
 
@@ -75,9 +79,9 @@ public class Terrain extends JPanel {
      *
      * @param partie
      */
-    public void setUnite(Partie partie){
+  /**  public void setUnite(Partie partie){
         this.listUnite=partie.getListUnite();
-    }
+    }*/
 
     /**
      *
@@ -199,7 +203,6 @@ public class Terrain extends JPanel {
 
     public void afficherUnite(Joueur joueur) {
         Compagnie compagnie=joueur.getCompagnie();
-
         for (Unite unite:compagnie.getListUnite()){
             afficheUniteItem(unite);
         }
@@ -234,10 +237,11 @@ public class Terrain extends JPanel {
         afficheUniteItem(this.getUniteSelected());
         cel.setUnite(this.getUniteSelected());
         cel.setEtat(true);
-        Cellule celPrec=this.celluleContenant(this.uniteSelected.getBoutonPrec().getX(),this.uniteSelected.getBoutonPrec().getX());
-        celPrec.setUnite(null);
-        celPrec.setEtat(false);
-        this.setUnite(this.partie);
+        //Cellule celPrec=this.celluleContenant(this.uniteSelected.getBoutonPrec().getX(),this.uniteSelected.getBoutonPrec().getX());
+        //celPrec.setUnite(null);
+        //celPrec.setEtat(false);
+        //this.setUnite(this.partie);
+        //this.listBouton.remove(getUniteSelected().getBoutonPrec());
         this.remove(this.getUniteSelected().getBoutonPrec());
 
     }
@@ -260,6 +264,13 @@ public class Terrain extends JPanel {
            return true;
        }else{
            return false;}
+}
+
+
+public void setListUnite(ArrayList<Unite> unites){
+        for(Unite unite: unites ){
+            this.listUnite.add(unite);
+        }
 }
 
 public boolean verifierLesPointsDeDeplacement(Cellule cel,Unite u){
@@ -509,7 +520,7 @@ public boolean verifierLesPointsDeDeplacement(Cellule cel,Unite u){
      * @param y
      * @return
      */
-    public Unite getUniteByCoord(int x, int y){
+   public Unite getUniteByCoord(int x, int y){
         for( Unite unite : this.listUnite){
             if(x == unite.getPosX() && y == unite.getPosY()){
                 return unite;

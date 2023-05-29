@@ -34,6 +34,8 @@ public class Home {
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+
+
         Terrain terrain = new Terrain(frame);
         Partie partie = new Partie(1, terrain, this.pseudo1, this.pseudo2);
 
@@ -76,7 +78,7 @@ public class Home {
         fichier.add(quitter);
         action.add(annuler);
         frame.setTitle("C'est au tour de: "+partie.getJoueurActif().getPseudo()+" de jouer");
-        terrain.setUnite(partie);
+
         action.add(valider);
 
 
@@ -96,36 +98,41 @@ public class Home {
         frame.setVisible(true);
     }
 
+    /**
+     * cette fonction fait la même chose que la precedente sauf qu'elle permet de relancer une partie déjà enregistrer
+     * @param partie
+     */
     public void main2(Partie partie) {
         JFrame frame = new JFrame();
         frame.setSize(1300, 900);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+
+
         Terrain terrain = new Terrain(frame);
-        partie = partie;
         partie.setTerrain(terrain);
         partie.AfficherUnite();
+        partie.resetDemarer();
+
 
 
         JMenuBar menuBar = new JMenuBar();
         JMenu fichier = new JMenu("Fichier");
         JMenu action = new JMenu("Action");
         JMenuItem annuler = new JMenuItem("Annler mouvement");
-        JMenuItem valider = new JMenu("Valider");
+        JMenuItem valider = new JMenuItem("Valider");
         JMenuItem quitter = new JMenuItem("Quitter");
         JMenuItem retour = new JMenuItem("Retour au Menu");
         JMenuItem enregistrer = new JMenuItem("Enregistrer la partie");
 
 
-
-        Partie finalPartie = partie;
         retour.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int option=JOptionPane.showConfirmDialog(frame,"Voulez vous Enregistrer la partie en cours ?");
                 if(option==JOptionPane.YES_OPTION){
-                    new EnregistrerPartieListener(finalPartie);
+                    new EnregistrerPartieListener(partie);
                     frame.dispose();
                 }else {
                     frame.dispose();
@@ -133,26 +140,31 @@ public class Home {
             }
 
         });
+        valider.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
-        finalPartie.resetDemarer();
+                partie.demarrer();
+                frame.setTitle("C'est au tour de: "+partie.getJoueurActif().getPseudo()+" de jouer");
+            }
+        });
         quitter.addActionListener(new QuitterListener());
         fichier.add(enregistrer);
         fichier.add(retour);
         fichier.add(quitter);
         action.add(annuler);
+        frame.setTitle("C'est au tour de: "+partie.getJoueurActif().getPseudo()+" de jouer");
+
         action.add(valider);
+
+
+
         menuBar.add(fichier);
         menuBar.add(action);
         frame.setJMenuBar(menuBar);
-        valider.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                finalPartie.demarrer();
-            }
-        });
         BackgroundTerrain background = new BackgroundTerrain();
         frame.setLayout(new OverlayLayout(frame.getContentPane()));
+
         annuler.addActionListener(new AnnulerListener(terrain));
         new CelluleMouseEventListener(terrain);
         terrain.setOpaque(false);

@@ -257,6 +257,7 @@ public class Unite {
 
     public void setBouton(JButton bouton) {
         this.bouton = bouton;
+
     }
 
     /**
