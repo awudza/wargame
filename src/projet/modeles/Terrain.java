@@ -257,7 +257,7 @@ public class Terrain extends JPanel {
    public boolean verifierPossibiliteDeDeplacer(Cellule cel,Unite u){
     int  distance = (int) Math.sqrt(Math.pow((cel.getCenter().x-(u.getPosX()+14)),2) + Math.pow((cel.getCenter().y - (u.getPosY()+25)), 2));
        if(distance <=  DIST){
-            return true;
+           return true;
        }else{
            return false;}
 }
@@ -501,5 +501,20 @@ public boolean verifierLesPointsDeDeplacement(Cellule cel,Unite u){
             }
         }
         return false;
+    }
+
+    /**
+     *
+     * @param x
+     * @param y
+     * @return
+     */
+    public Unite getUniteByCoord(int x, int y){
+        for( Unite unite : this.listUnite){
+            if(x == unite.getPosX() && y == unite.getPosY()){
+                return unite;
+            }
+        }
+        return null;
     }
 }

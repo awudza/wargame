@@ -10,7 +10,7 @@ public class Partie {
     private Joueur joueur1;
     private Joueur joueur2;
 
-    private int maxTour=1;
+    private int maxTour=5;
     private ArrayList<Unite> listUnite;
     private Joueur joueurActif;
 

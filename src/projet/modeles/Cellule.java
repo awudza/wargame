@@ -17,7 +17,7 @@ public class Cellule extends Polygon{
     private int radius;
     private int rotation = 90;
     private int id;
-    private boolean etat;
+    private boolean etat = false;
 
     private Unite unite;
     private Terrain terrain;
@@ -75,6 +75,14 @@ public class Cellule extends Polygon{
 
     public TypeTerrain getTypeTerrain() {
         return typeTerrain;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public boolean getEtat() {
+        return etat;
     }
 
     /**
