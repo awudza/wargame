@@ -46,9 +46,16 @@ public class CelluleMouseEventListener extends MouseAdapter {
     public void mouseClicked(MouseEvent e) {
         Cellule cel = this.terrain.celluleContenant(e.getPoint().x, e.getPoint().y);
         if(terrain.verifierPossibiliteDeDeplacer(cel,this.terrain.getUniteSelected()) && this.terrain.verifierLesPointsDeDeplacement(cel,this.terrain.getUniteSelected())) {
-            this.terrain.getUniteSelected().setPos(cel.getCenter().x - 14, cel.getCenter().y - 25);
-            this.terrain.deplacer(cel);
-            this.terrain.getUniteSelected().setpDeplacement(this.terrain.getUniteSelected().getpDeplacement() -cel.getTypeTerrain().getpDeplacement() );
+            if(cel.getEtat()){
+                int pv = this.terrain.getUniteSelected().attaquer(this.terrain.getUniteByCoord(cel.getCenter().x, cel.getCenter().y), cel);
+                if(pv<=0){
+                    this.deplacement(cel);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Votre attaque n'est pas suffissante pour tuer l'énnemi. Il lui reste "+pv+" points de vie.");
+                }
+            }else{
+                this.deplacement(cel);
+            }
         }else {
             if(!terrain.verifierPossibiliteDeDeplacer(cel,this.terrain.getUniteSelected())){
                 JOptionPane.showMessageDialog(null,"Vous devez deplacer les unités de case en case");
@@ -78,4 +85,10 @@ public class CelluleMouseEventListener extends MouseAdapter {
         return false;
     }
 
+    private void deplacement(Cellule cel){
+        this.terrain.getUniteSelected().setPos(cel.getCenter().x - 14, cel.getCenter().y - 25);
+        this.terrain.deplacer(cel);
+        this.terrain.celluleContenant(this.terrain.getUniteSelected().getPosX()+14, this.terrain.getUniteSelected().getPosY()+25).setEtat(false);
+        this.terrain.getUniteSelected().setpDeplacement(this.terrain.getUniteSelected().getpDeplacement() -cel.getTypeTerrain().getpDeplacement() );
+    }
 }

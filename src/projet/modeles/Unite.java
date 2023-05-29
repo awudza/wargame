@@ -281,7 +281,7 @@ public class Unite {
         return enr.toString();
     }
 
-    public boolean attaquer(Unite unite, Cellule cellule){
+    public int attaquer(Unite unite, Cellule cellule){
         Random random = new Random();
         int pDefense = unite.getType().getpDefense() + (int)((unite.getType().getpDefense() * cellule.getTypeTerrain().getBonusDefense())/100);
         int dBrute = this.getType().getpAttaque() - pDefense;
@@ -289,11 +289,7 @@ public class Unite {
         int pv = unite.getpDeVie()-degat;
         unite.setDegat(degat);
         unite.setpDeVie(pv);
-        if(pv>0){
-            return true;
-        }else{
-            return false;
-        }
+        return pv;
     }
 
 }
