@@ -6,6 +6,8 @@ import projet.view.events.UniteListener;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.HierarchyEvent;
+import java.awt.event.HierarchyListener;
 import java.util.ArrayList;
 
 public class Terrain extends JPanel {
@@ -129,6 +131,11 @@ public class Terrain extends JPanel {
         dessinerGrilleHexagone(g2d, 60, 40);
     }
 
+
+    public ArrayList<Cellule> getListCellules() {
+        return listCellules;
+    }
+
     private void dessinerGrilleHexagone(Graphics g, int n, int r) {
         double ang30 = Math.toRadians(30);
         double xOff = Math.cos(ang30) * r;
@@ -186,6 +193,7 @@ public class Terrain extends JPanel {
 
         // Afficher les coordonnées de la case
         g.drawString(coordinates, textX, textY);
+        setEtatInitiale(cellule);
     }
 
     /**
@@ -224,6 +232,16 @@ public class Terrain extends JPanel {
 
     }
 
+    /**
+     * cette fonction permet d'initialiser les cellules occupées au début à true
+     */
+
+    public void setEtatInitiale(Cellule cellule){
+        if(cellule.contain(1244,375)|| cellule.contain(1070, 315)||cellule.contain(1140,435)|| cellule.contain(1070,195)||cellule.contain(1140,95)||cellule.contain(932,315)||cellule.contain(932,435)|| cellule.contain(1105, 615)|| cellule.contain(101, 686)||cellule.contain(239,675)||cellule.contain(202,595)||cellule.contain(308,806)||cellule.contain(447,675)|| cellule.contain(204,495)||cellule.contain(343,615)||cellule.contain(308,435)){
+            cellule.setEtat(true);
+        }
+    }
+
     public void setUniteSelected(Unite uniteSelected) {
         this.uniteSelected = uniteSelected;
     }
@@ -235,13 +253,7 @@ public class Terrain extends JPanel {
     public void deplacer(Cellule cel) {
         this.getUniteSelected().setBoutonPrec(this.getUniteSelected().getBouton());
         afficheUniteItem(this.getUniteSelected());
-        cel.setUnite(this.getUniteSelected());
-        cel.setEtat(true);
-        //Cellule celPrec=this.celluleContenant(this.uniteSelected.getBoutonPrec().getX(),this.uniteSelected.getBoutonPrec().getX());
-        //celPrec.setUnite(null);
-        //celPrec.setEtat(false);
-        //this.setUnite(this.partie);
-        //this.listBouton.remove(getUniteSelected().getBoutonPrec());
+        this.celluleContenant(this.uniteSelected.getBoutonPrec().getX(),this.uniteSelected.getBoutonPrec().getY()).setEtat(false);
         this.remove(this.getUniteSelected().getBoutonPrec());
 
     }

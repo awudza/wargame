@@ -18,12 +18,15 @@ public class Unite {
 
     private int posX;
     private int posY;
+    private Terrain terrain;
 
     private JButton boutonPrec;
 
     private JButton bouton;
     private Joueur joueur;
     private int pDeplacement;
+
+    private boolean initialize;
   private  int pDeVie;
 
 
@@ -46,7 +49,12 @@ public class Unite {
         this.pDeplacement=type.getpDeplacement();
         this.pDeVie=this.type.getPointDeVie();
     }
-    public Unite(String nom, boolean etat,TypeUnite type,Joueur joueur){
+
+    public void setTerrain(Terrain terrain) {
+        this.terrain = terrain;
+    }
+
+    public Unite(String nom, boolean etat, TypeUnite type, Joueur joueur){
         this.degat=0;
         this.nom=nom;
         this.etat=etat;
@@ -190,7 +198,6 @@ public class Unite {
         this.bouton = new JButton();
         bouton.setBounds(this.posX, this.posY, 30, 55);
         bouton.setBorder(new LineBorder(color, 2));
-
         String libelle = this.type.getLibelle();
         String tooltip = "";
         String imagePath = "";
@@ -225,7 +232,6 @@ public class Unite {
         Image resizedImage = image.getScaledInstance(bouton.getWidth(), bouton.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon resizedIcon = new ImageIcon(resizedImage);
         bouton.setIcon(resizedIcon);
-
         return bouton;
     }
 

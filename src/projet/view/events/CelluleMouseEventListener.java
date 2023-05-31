@@ -45,13 +45,14 @@ public class CelluleMouseEventListener extends MouseAdapter {
 
     public void mouseClicked(MouseEvent e) {
         Cellule cel = this.terrain.celluleContenant(e.getPoint().x, e.getPoint().y);
+        System.out.println(cel.getEtat());
         if(terrain.verifierPossibiliteDeDeplacer(cel,this.terrain.getUniteSelected()) && this.terrain.verifierLesPointsDeDeplacement(cel,this.terrain.getUniteSelected())) {
-            if(cel.getEtat()){
+            if(cel.getEtat()==true){
                 int pv = this.terrain.getUniteSelected().attaquer(this.terrain.getUniteByCoord(cel.getCenter().x, cel.getCenter().y), cel);
                if(pv<=0){
                     this.deplacement(cel);
                 }else{
-                    JOptionPane.showMessageDialog(null, "Votre attaque n'est pas suffissante pour tuer l'énnemi. Il lui reste "+/**pv+*/" points de vie.");
+                    JOptionPane.showMessageDialog(null, "Votre attaque n'est pas suffissante pour tuer l'énnemi. Il lui reste "+pv+" points de vie.");
                }
             }else{
                 this.deplacement(cel);

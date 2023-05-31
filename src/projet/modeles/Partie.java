@@ -31,6 +31,7 @@ public class Partie {
         this.terrain.setListUnite(joueur2.getCompagnie().getListUnite());
         AfficherUnite();
         demarrer();
+
     }
 
     public Partie(Joueur joueur1, Joueur joueur2){
@@ -77,8 +78,9 @@ public class Partie {
      * @param terrain
      */
     public void setTerrain(Terrain terrain) {
-
         this.terrain = terrain;
+        this.terrain.setListUnite(this.joueur1.getCompagnie().getListUnite());
+        this.terrain.setListUnite(this.joueur2.getCompagnie().getListUnite());
         this.terrain.setPartie(this);
     }
 
@@ -108,6 +110,12 @@ public class Partie {
     private int nbTour=0;
     private int tmp=0;
 
+
+    /**
+     * cette fonction permet d'initialiser les cellules occupées au début à true
+     */
+
+
 public void demarrer(){
 
 
@@ -132,13 +140,4 @@ if(nbTour<maxTour){
         return joueurActif;
     }
 
-    public ArrayList<Unite> getListUnite() {
-    this.listUnite.clear();
-    this.listUnite=this.joueur1.getCompagnie().getListUnite();
-    for(Unite unite:this.joueur2.getCompagnie().getListUnite()){
-        this.listUnite.add(unite);
-    }
-    return this.listUnite;
-
-    }
 }
