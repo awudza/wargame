@@ -176,7 +176,7 @@ public class Terrain extends JPanel {
             g.setColor(new Color(51,0,0));
             g.drawPolygon(cellule);
         }else{
-            g.setColor(new Color(255,255,255,50));
+            g.setColor(new Color(255,255,255,0));
             g.drawPolygon(cellule);
         }
         g.setColor(new Color(0xFFFFFF));
@@ -192,7 +192,7 @@ public class Terrain extends JPanel {
         g.setFont(new Font("Arial", Font.PLAIN, 12)); // Modifier la police et la taille selon vos besoins
 
         // Afficher les coordonnées de la case
-        g.drawString(coordinates, textX, textY);
+        //g.drawString(coordinates, textX, textY);
         setEtatInitiale(cellule);
     }
 

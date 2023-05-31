@@ -40,7 +40,7 @@ public class OptionsFrame extends JFrame {
         Image resizedImage1 = image1.getScaledInstance(70, 70, Image.SCALE_SMOOTH);
         ImageIcon resizedIcon1 = new ImageIcon(resizedImage1);
         stopButton.setIcon(resizedIcon1);
-        //playAudio();
+        playAudio();
 
 
         JButton retour=new JButton("Retour au Menu");
